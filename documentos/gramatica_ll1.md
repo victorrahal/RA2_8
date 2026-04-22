@@ -146,11 +146,11 @@ Calculados sobre os não-terminais **efetivamente usados pelo parser**
 | `programa`       | { `$` }                                                               |
 | `linhas`         | { `$` }                                                               |
 | `linhas_rest`    | { `$` }                                                               |
-| `linha`          | { `INT`, `KW_MEM`, `KW_RES`, `LPAREN`, `MEM_ID`, `REAL`, `RPAREN`, todos os `OP_*` } |
+| `linha`          | { `INT`, `KW_MEM`, `KW_RES`, `LPAREN`, `MEM_ID`, `OP_DIVI`, `OP_DIVR`, `OP_EQ`, `OP_GE`, `OP_GT`, `OP_LE`, `OP_LT`, `OP_MOD`, `OP_MUL`, `OP_NE`, `OP_POW`, `OP_SUB`, `OP_SUM`, `REAL`, `RPAREN` } |
 | `corpo`          | { `RPAREN` }                                                          |
 | `cauda_mem`      | { `RPAREN` }                                                          |
 | `resto_corpo`    | { `RPAREN` }                                                          |
-| `operando`       | { `INT`, `LPAREN`, `MEM_ID`, `REAL`, todos os `OP_*` arit. e rel. }   |
+| `operando`       | { `INT`, `LPAREN`, `MEM_ID`, `OP_DIVI`, `OP_DIVR`, `OP_EQ`, `OP_GE`, `OP_GT`, `OP_LE`, `OP_LT`, `OP_MOD`, `OP_MUL`, `OP_NE`, `OP_POW`, `OP_SUB`, `OP_SUM`, `REAL` } |
 | `operador_arit`  | { `RPAREN` }                                                          |
 | `condicao`       | { `LPAREN` }                                                          |
 | `op_rel`         | { `RPAREN` }                                                          |
