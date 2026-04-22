@@ -30,13 +30,13 @@ consumida pelo parser descendente recursivo.
 | `INT`     | literal inteiro (ex.: `3`, `-42`)                   |
 | `REAL`    | literal real IEEE 754 double (ex.: `3.14`, `-0.5`)  |
 | `MEM_ID`  | identificador de memória (letras maiúsculas latinas)|
-| `OP_SOM`  | `+`                                                 |
+| `OP_SUM`  | `+`                                                 |
 | `OP_SUB`  | `-`                                                 |
 | `OP_MUL`  | `*`                                                 |
 | `OP_DIVR` | `\|` (divisão real)                                 |
 | `OP_DIVI` | `/` (divisão inteira)                               |
 | `OP_MOD`  | `%`                                                 |
-| `OP_POT`  | `^`                                                 |
+| `OP_POW`  | `^`                                                 |
 | `OP_LT`   | `<`                                                 |
 | `OP_GT`   | `>`                                                 |
 | `OP_LE`   | `<=`                                                |

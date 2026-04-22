@@ -74,8 +74,8 @@ GRAMATICA = {
         ["linha"],
     ],
     "operador_arit": [
-        ["OP_SOM"], ["OP_SUB"], ["OP_MUL"],
-        ["OP_DIVR"], ["OP_DIVI"], ["OP_MOD"], ["OP_POT"],
+        ["OP_SUM"], ["OP_SUB"], ["OP_MUL"],
+        ["OP_DIVR"], ["OP_DIVI"], ["OP_MOD"], ["OP_POW"],
     ],
     "expressao": [
         ["LPAREN", "operando", "operando", "operador_arit", "RPAREN"],
