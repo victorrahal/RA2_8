@@ -293,6 +293,8 @@ def _imprimir_resumo(info):
 
 
 if __name__ == "__main__":
+    import sys
+    sys.stdout.reconfigure(encoding="utf-8")
     info = construirGramatica()
     _imprimir_resumo(info)
     print()
