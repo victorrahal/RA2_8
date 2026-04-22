@@ -235,7 +235,7 @@ python3 src/construirGramatica.py
 a última linha da saída é:
 
 ```
-✔ Gramática validada como LL(1) (sem conflitos na tabela).
+Gramática validada como LL(1) (sem conflitos na tabela).
 ```
 
 Caso qualquer alteração futura introduza uma produção conflitante, a
