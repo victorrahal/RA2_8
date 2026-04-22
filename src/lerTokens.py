@@ -1,7 +1,7 @@
 # Paulo Henrique Eidi Mino - Aluno 3
 
 from tokensConfig import criarToken, OPERADORES_SIMPLES, OPERADORES_DUPLOS
-from estadosLexico import estadoNumero, estadoPalavra
+from estadosLexicos import estadoNumero, estadoPalavra
 
 def lerTokens(arquivo):
     tokens = []
