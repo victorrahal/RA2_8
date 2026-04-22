@@ -101,5 +101,5 @@ TABELA LL(1) — entradas (nao_terminal, terminal) -> produção
   M[resto_corpo   , MEM_ID    ] = resto_corpo -> operando operador_arit
   M[resto_corpo   , REAL      ] = resto_corpo -> operando operador_arit
 
-✔ Gramática validada como LL(1) (sem conflitos na tabela).
+Gramática validada como LL(1) (sem conflitos na tabela).
 ```

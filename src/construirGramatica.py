@@ -298,4 +298,4 @@ if __name__ == "__main__":
     info = construirGramatica()
     _imprimir_resumo(info)
     print()
-    print("✔ Gramática validada como LL(1) (sem conflitos na tabela).")
+    print("Gramática validada como LL(1) (sem conflitos na tabela).")
