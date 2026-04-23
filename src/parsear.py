@@ -1,3 +1,4 @@
+# João Henrique Tomaz Dutra - Aluno 2
 from construirGramatica import construirGramatica, eh_terminal
 
 EPSILON = "ε"
@@ -5,13 +6,13 @@ EOF = "$"
 
 class No:
     def __init__(self, simbolo, tipo_no):
-        self.simbolo = simbolo
+        self.simbolo = simbolo # guarda o símbolo da gramática
         self.tipo_no = tipo_no  # "terminal" ou "nao_terminal"
-        self.producao = None
+        self.producao = None   # pega regra de produção da gramática 
         self.token = None
-        self.filhos = []
+        self.filhos = []  # listas de nós filhos
 
-    def to_dict(self):
+    def to_dict(self):   # transforma toda ela em um dicionário JSON
         resultado = {
             "tipo_no": self.tipo_no,
             "simbolo": self.simbolo
@@ -29,19 +30,19 @@ class No:
         return resultado
 
 
-def validar_terminal(simbolo, tabela):
+def validar_terminal(simbolo, tabela):    # valida terminais, verificando se está ou não dentro da tabela
     nao_terminais = {chave[0] for chave in tabela}
     return simbolo not in nao_terminais and simbolo != EPSILON
 
 
 def parsear(tokens, tabela, simbolo_inicial):
-    pilha = [EOF, simbolo_inicial]
-    pilha_nos = []
+    pilha = [EOF, simbolo_inicial]   # inicialisando a pilha com $ e S
+    pilha_nos = [] # pilha da ávore
 
-    derivacao = []
-    i = 0
+    derivacao = [] # guardando as regras aplicadas dentro da derivação
+    i = 0 # lookahead
 
-    raiz = No(simbolo_inicial, "nao_terminal")
+    raiz = No(simbolo_inicial, "nao_terminal")  # começo da árvore
     pilha_nos.append(No(EOF, "terminal"))  
     pilha_nos.append(raiz)
 
@@ -49,43 +50,43 @@ def parsear(tokens, tabela, simbolo_inicial):
         if i >= len(tokens):
             raise Exception("Erro sintático: fim inesperado da entrada")
 
-        topo = pilha.pop()
+        topo = pilha.pop()  # removendo símbolo e nó correspondente 
         no_atual = pilha_nos.pop()
 
-        atual = tokens[i]
+        atual = tokens[i]   # lookahead
         tipo_atual = atual["tipo"]
         linha_atual = atual["linha"]
 
         print(f"Topo: {topo} | Token atual: {tipo_atual}")
 
-        # parada
+        # condição de parada
         if topo == EOF and tipo_atual == EOF:
             break
 
-        if validar_terminal(topo, tabela) or topo == EOF:
+        if validar_terminal(topo, tabela) or topo == EOF: # Se topo for terminal consome o token
             if topo == tipo_atual:
                 no_atual.token = atual  
                 i += 1
             else:
                 raise Exception(
-                    f"Erro sintático na linha {linha_atual}: "
+                    f"Erro sintático na linha {linha_atual}: "  # Se não bate dá um erro sintático 
                     f"esperado '{topo}', encontrado '{tipo_atual}'"
                 )
 
-
+        # Não terminal
         else:
-            chave = (topo, tipo_atual)
+            chave = (topo, tipo_atual) # M[A, a]
 
-            if chave in tabela:
-                prod = tabela[chave]
+            if chave in tabela:  # Se existe uma regra ele puxa 
+                prod = tabela[chave] # Pegou a produção
 
 
-                derivacao.append(f"{topo} -> {' '.join(prod)}")
+                derivacao.append(f"{topo} -> {' '.join(prod)}")  # Salva derivação nesse formato
 
-                no_atual.producao = prod
+                no_atual.producao = prod # Salva na árvore
 
                 filhos = []
-
+                # Para cada símbolo da produção cria filhos
                 for s in prod:
                     if s != EPSILON:
                         tipo_no = "terminal" if validar_terminal(s, tabela) else "nao_terminal"
@@ -94,7 +95,7 @@ def parsear(tokens, tabela, simbolo_inicial):
 
              
                 no_atual.filhos = filhos
-
+                # Empilha produção de trás pra frente 
                
                 for f in reversed(filhos):
                     pilha.append(f.simbolo)
@@ -103,10 +104,10 @@ def parsear(tokens, tabela, simbolo_inicial):
             else:
                 raise Exception(
                     f"Erro sintático na linha {linha_atual}: "
-                    f"não há regra para ({topo}, {tipo_atual})"
+                    f"não há regra para ({topo}, {tipo_atual})" # Se não tem regra dá erro
                 )
 
-    return derivacao, raiz.to_dict()
+    return derivacao, raiz.to_dict() # retorna a derivação e a árvore em formato de JSON
 
 
 # ================= TESTE =================
@@ -137,10 +138,10 @@ tokens = [
 
 derivacao, arvore = parsear(tokens, info["tabela_ll1"], info["inicio"])
 
-print("\nDERIVAÇÃO:")
+print("\nDERIVAÇÃO:") # Solta o print da derivação 
 for d in derivacao:
-    print(d)
+    print(d) 
 
 import json
-print("\nÁRVORE:")
+print("\nÁRVORE:") # Solta o JSON da árvore 
 print(json.dumps(arvore, indent=2, ensure_ascii=False))
