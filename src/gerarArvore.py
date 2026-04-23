@@ -92,6 +92,23 @@ def simplificarArvore(no):
                         "linha": primeiroTermo.token.get("linha")
                     }
                 
+                # caso de leitura de memória
+                if (primeiroTermo.tipo_no == "terminal" and primeiroTermo.simbolo == "MEM_ID" and segundoTermo.simbolo == "cauda_mem" and len(segundoTermo.filhos) == 0):
+                    return{
+                        "tipo": "leitura_memoria",
+                        "nome": primeiroTermo.token.get("valor"),
+                        "linha": primeiroTermo.token.get("linha")
+                    }
+                
+                # caso de atribuição de memória
+                if (segundoTermo.simbolo == "resto_corpo" and segundoTermo.filhos[0].tipo_no == "terminal" and segundoTermo.filhos[0].simbolo == "KW_MEM" and segundoTermo.filhos[1].tipo_no == "terminal" and segundoTermo.filhos[1].simbolo == "MEM_ID"):
+                    return{
+                        "tipo": "atribuicao_memoria",
+                        "nome": segundoTermo.filhos[1].token.get("valor"),
+                        "valor": simplificarArvore(primeiroTermo),
+                        "linha": segundoTermo.filhos[1].token.get("linha")
+                    }
+                
                 #caso expressão aritmética
                 esquerdo = simplificarArvore(no.filhos[0])
                 resto = no.filhos[1]
