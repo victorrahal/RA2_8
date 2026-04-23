@@ -4,6 +4,7 @@ from lerTokens import lerTokens
 import json
 import os
 
+
 EPSILON = "ε"
 EOF = "$"
 
@@ -139,8 +140,9 @@ tokens = [
     {"tipo": "$", "valor": "$", "linha": 1},
 ]
 
+tokens2 = lerTokens(r'C:\Users\joaoh\Documents\GitHub\RA2_8\testes\teste1.txt')
 
-derivacao, arvore = parsear(tokens, info["tabela_ll1"], info["inicio"])
+derivacao, arvore = parsear(tokens2, info["tabela_ll1"], info["inicio"])
 
 print("\nDERIVAÇÃO:") # Solta o print da derivação 
 for d in derivacao:
