@@ -22,7 +22,7 @@ def gerarArvore(derivacao): #cria a árvore a partir da derivação recebida
         filhos = []
     )
 
-    # percorrer recursivamente os filhos da derivação e covnerter em nós de árvore
+    # percorrer recursivamente os filhos da derivação e converte em nós de árvore
     for filho in derivacao.get("filhos", []):
         no.filhos.append(gerarArvore(filho))
 
@@ -37,24 +37,54 @@ def simplificarArvore(no):
             "linha": no.token.get("linha")
         }
     match no.simbolo:
+        case "programa":
+            for filho in no.filhos:
+                if filho.simbolo == "linhas":
+                    return simplificarArvore(filho)
+
+        case "linhas":
+            for filho in no.filhos:
+                if filho.simbolo == "linhas_rest":
+                    return simplificarArvore(filho)
+        
+        case "linhas_rest":
+            if len(no.filhos) == 2:
+                primeiroTermo = no.filhos[0]
+                if primeiroTermo.tipo_no == "terminal" and primeiroTermo.simbolo == "KW_END":
+                    return {
+                        "tipo": "fim_programa",
+                        "linha": primeiroTermo.token.get("linha")
+                    }
+                
+            # caso linhas normais
+            if len(no.filhos) == 3:
+                termoAtual = simplificarArvore(no.filhos[0])
+                proximoTermo = simplificarArvore(no.filhos[2])
+                return {
+                    "tipo": "sequencia",
+                    "atual": termoAtual,
+                    "proximo": proximoTermo 
+                }
+            
         case "linha":
             for filho in no.filhos:
                 if filho.simbolo == "corpo":
                     return simplificarArvore(filho)
                 
-        case "corpo": #para RES
+        case "corpo": 
             if len(no.filhos) == 2:
                 primeiroTermo = no.filhos[0]
                 segundoTermo = no.filhos[1]
 
-                if (primeiroTermo.tipo+no == "terminal" and primeiroTermo.simbolo == "INT" and segundoTermo.tipo_no == "terminal" and segundoTermo.simbolo == "KW_RES"):
+                #para RES
+                if (primeiroTermo.tipo_no == "terminal" and primeiroTermo.simbolo == "INT" and segundoTermo.simbolo == "resto_corpo" and len(segundoTermo.filhos) == 1 and segundoTermo.filhos[0].tipo_no == "terminal" and segundoTermo.filhos[0].simbolo == "KW_RES"):
                     return {
                         "tipo": "res",
                         "indice": int(primeiroTermo.token.get("valor")),
                         "linha": primeiroTermo.token.get("linha")
                     }
-        case "corpo":
-            if len(no.filhos) == 2:
+                
+                #caso expressão aritmética
                 esquerdo = simplificarArvore(no.filhos[0])
                 resto = no.filhos[1]
                 if resto.simbolo == "resto_corpo" and len(resto.filhos) == 2:
