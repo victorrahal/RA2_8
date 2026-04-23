@@ -1,5 +1,7 @@
 # João Henrique Tomaz Dutra - Aluno 2
 from construirGramatica import construirGramatica, eh_terminal
+import json
+import os
 
 EPSILON = "ε"
 EOF = "$"
@@ -123,8 +125,8 @@ tokens = [
     # ( 3 RES )
     {"tipo": "LPAREN", "valor": "(", "linha": 1},
 
-        {"tipo": "KW_MEM", "valor": "3", "linha": 1},
-        {"tipo": "MEM_ID", "valor": "A", "linha": 1},
+        {"tipo": "INT", "valor": "3", "linha": 1},
+        {"tipo": "KW_RES", "valor": "A", "linha": 1},
 
     {"tipo": "RPAREN", "valor": ")", "linha": 1},
 
@@ -142,6 +144,14 @@ print("\nDERIVAÇÃO:") # Solta o print da derivação
 for d in derivacao:
     print(d) 
 
-import json
-print("\nÁRVORE:") # Solta o JSON da árvore 
-print(json.dumps(arvore, indent=2, ensure_ascii=False))
+
+pasta = r"C:\Users\joaoh\Documents\GitHub\RA2_8\saida"
+
+os.makedirs(pasta, exist_ok=True)
+
+caminho_arquivo = os.path.join(pasta, "derivacao.json")
+
+with open(caminho_arquivo, "w", encoding="utf-8") as f:
+    json.dump(arvore, f, indent=2, ensure_ascii=False)
+
+print("Árvore salva em:", caminho_arquivo)
