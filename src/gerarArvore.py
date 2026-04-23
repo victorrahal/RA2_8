@@ -7,3 +7,8 @@ class No:
 
     def __repr__(self):
         return f"No({self.valor})"
+
+def imprimirArvore(no, nivel=0):
+    print("  " * nivel + str(no.valor))
+    for filho in no.filhos:
+        imprimirArvore(filho, nivel + 1)
