@@ -8,12 +8,10 @@ from src.gerarAssembly import gerarAssembly
 derivacao = carregarDerivacao()
 arvore = gerarArvore(derivacao)
 
-print('----ARVORE DE DERIVAÇÃO----')
+print('----ARVORE SINTÁTICA----')
 imprimirArvore(arvore)
 
-arvoreSimplificada = simplificarArvore(arvore)
-print('----ARVORE SIMPLIFICADA----')
-print(json.dumps(arvoreSimplificada, indent=2, ensure_ascii=False))
+arvoreSimplificada = simplificarArvore(arvore) #salva arvore simplificada
 
 caminho1 = salvarArvore(arvore)
 print(f"Árvore salva em: {caminho1}")
@@ -21,8 +19,4 @@ print(f"Árvore salva em: {caminho1}")
 caminho2 = salvarArvoreSimplificada(arvoreSimplificada)
 print(f"Árvore Simplificada salva em: {caminho2}")
 
-codigoAssembly = gerarAssembly(arvoreSimplificada)
-
-print("\n---- ASSEMBLY ----")
-for linha in codigoAssembly:
-    print(linha)
+codigoAssembly = gerarAssembly(arvoreSimplificada) #salva assembly
