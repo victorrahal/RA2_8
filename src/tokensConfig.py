@@ -9,7 +9,7 @@ KEYWORDS = {
     "IF":    "KW_IF",
     "WHILE": "KW_WHILE",
     "FOR":   "KW_FOR"}
-
+ 
 OPERADORES_SIMPLES = {
     '+': 'OP_SUM',
     '-': 'OP_SUB',
@@ -17,13 +17,15 @@ OPERADORES_SIMPLES = {
     '|': 'OP_DIVR',
     '/': 'OP_DIVI',
     '%': 'OP_MOD',
-    '^': 'OP_POW'}
-
+    '^': 'OP_POW',
+    '<': 'OP_LT',
+    '>': 'OP_GT'}
+ 
 OPERADORES_DUPLOS = {
     '<': 'OP_LE',
     '>': 'OP_GE',
     '=': 'OP_EQ',
     '!': 'OP_NE'}
-
+ 
 def criarToken(tipo, valor, linha):
     return {"tipo": tipo, "valor": valor, "linha": linha}
