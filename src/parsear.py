@@ -1,95 +1,91 @@
-tokens = ["(", "id", "id", "+", ")", "$"]
+from construirGramatica import construirGramatica
 
-tabela = {
-    ("E", "("): ["(", "E", "E", "op", ")"],
-    ("E", "id"): ["id"],
-    ("op", "+"): ["+"],
-}
-
-class No:
-    def __init__(self, tipo, valor=None):
-        self.tipo = tipo
-        self.valor = valor
-        self.filhos = []
-
-    def add(self, filho):
-        self.filhos.append(filho)
-
-    def __repr__(self):
-        return f"{self.tipo}({self.valor})"
+EPSILON = "ε"
+EOF = "$"
 
 def validar_terminal(simbolo, tabela):
     nao_terminais = {chave[0] for chave in tabela}
-    return simbolo not in nao_terminais and simbolo != "ε"
+    return simbolo not in nao_terminais and simbolo != EPSILON
 
 
-def parsear(tokens, tabela):
-    pilha = ["$", "E"]
-    pilha_semantica = []
+def parsear(tokens, tabela, simbolo_inicial):
+    # 🔹 pilha sintática
+    pilha = [EOF, simbolo_inicial]
+
+    # 🔹 derivação
     derivacao = []
+
+    # 🔹 ponteiro de entrada
     i = 0
 
-    while pilha:  # ✅ corrigido
+    while pilha:
         if i >= len(tokens):
-            raise Exception("Fim inesperado dos tokens")
+            raise Exception("Erro sintático: fim inesperado da entrada")
 
-        atual = tokens[i]
         topo = pilha.pop()
+        atual = tokens[i]
 
-        print(f"topo: {topo}")
-        print(f"atual: {atual}")
+        tipo_atual = atual["tipo"]
+        linha_atual = atual["linha"]
 
-        # condição de parada
-        if topo == "$" and atual == "$":
+        print(f"Topo: {topo} | Token atual: {tipo_atual}")
+
+        # ✅ condição de parada
+        if topo == EOF and tipo_atual == EOF:
             break
 
         # ✅ TERMINAL
-        if validar_terminal(topo, tabela) or topo == "$":
-            if atual == topo:
-
-                # 🌳 AST
-                if topo == "id":
-                    pilha_semantica.append(No("id", "x"))
-
-                elif topo == "+":
-                    if len(pilha_semantica) >= 2:
-                        dir = pilha_semantica.pop()
-                        esq = pilha_semantica.pop()
-                        no = No("+")
-                        no.add(esq)
-                        no.add(dir)
-                        pilha_semantica.append(no)
-
-                i += 1
-
+        if validar_terminal(topo, tabela) or topo == EOF:
+            if topo == tipo_atual:
+                i += 1  # consome token
             else:
-                raise Exception(f"Erro sintático: esperado '{topo}', encontrado '{atual}' na posicao {i}")
+                raise Exception(
+                    f"Erro sintático na linha {linha_atual}: "
+                    f"esperado '{topo}', encontrado '{tipo_atual}'"
+                )
 
         # ✅ NÃO TERMINAL
-        elif (topo, atual) in tabela:
-            prod = tabela[(topo, atual)]
-            resultado = ' '
-            derivacao.append(f"{topo} -> {resultado.join(prod)}")
-
-            for s in reversed(prod):
-                if s != "ε":
-                    pilha.append(s)
-
         else:
-            raise Exception(f"Erro sintático: esperado '{topo}', encontrado '{atual}' na posicao {i}")
+            chave = (topo, tipo_atual)
 
-    # 🌳 RAIZ
-    raiz = No("RAIZ")
-    temp = []
+            if chave in tabela:
+                prod = tabela[chave]
 
-    while pilha_semantica:
-        temp.append(pilha_semantica.pop())
+                # salva derivação
+                derivacao.append(f"{topo} -> {' '.join(prod)}")
 
-    for no in reversed(temp):
-        raiz.add(no)
+                # empilha produção (invertida)
+                for s in reversed(prod):
+                    if s != EPSILON:
+                        pilha.append(s)
+            else:
+                raise Exception(
+                    f"Erro sintático na linha {linha_atual}: "
+                    f"não há regra para ({topo}, {tipo_atual})"
+                )
 
-    return derivacao, raiz
+    return derivacao
 
 
-a = parsear(tokens,tabela)
-print(a)
+# 1. construir gramática (Aluno 1)
+info = construirGramatica()
+
+# 2. exemplo de tokens (Aluno 3)
+tokens = [
+    {"tipo": "LPAREN", "valor": "(", "linha": 1},
+    {"tipo": "KW_START", "valor": "START", "linha": 1},
+    {"tipo": "RPAREN", "valor": ")", "linha": 1},
+
+    {"tipo": "LPAREN", "valor": "(", "linha": 1},
+    {"tipo": "KW_END", "valor": "END", "linha": 1},
+    {"tipo": "RPAREN", "valor": ")", "linha": 1},
+
+    {"tipo": "$", "valor": "$", "linha": 1},
+]
+
+# 3. rodar parser
+derivacao = parsear(tokens, info["tabela_ll1"], info["inicio"])
+
+# 4. saída
+for d in derivacao:
+    print(d)
