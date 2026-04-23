@@ -1,0 +1,22 @@
+{
+  "valor": "+",
+  "filhos": [
+    {
+      "valor": "A",
+      "filhos": []
+    },
+    {
+      "valor": "*",
+      "filhos": [
+        {
+          "valor": "C",
+          "filhos": []
+        },
+        {
+          "valor": "D",
+          "filhos": []
+        }
+      ]
+    }
+  ]
+}
