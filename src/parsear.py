@@ -89,10 +89,10 @@ def parsear(tokens, tabela, simbolo_inicial):
 
                 filhos = []
                 # Para cada símbolo da produção cria filhos
-                for s in prod:
-                    if s != EPSILON:
-                        tipo_no = "terminal" if validar_terminal(s, tabela) else "nao_terminal"
-                        novo = No(s, tipo_no)
+                for simbolo in prod:
+                    if simbolo != EPSILON:
+                        tipo_no = "terminal" if validar_terminal(simbolo, tabela) else "nao_terminal"
+                        novo = No(simbolo, tipo_no)
                         filhos.append(novo)
 
              
