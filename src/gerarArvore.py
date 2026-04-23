@@ -1,11 +1,14 @@
 # Aluno 4 - Lucas Balint Vilar
 import json
 import os
+from graphviz import Digraph
 
 raiz = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 caminhoArvore = os.path.join(raiz, "saida", "arvore.json")
 caminhoArvore_simplificada = os.path.join(raiz, "saida", "arvore_simplificada.json")
 caminhoDerivacao = os.path.join(raiz, "saida", "derivacao.json")
+caminhoGrafico = os.path.join(raiz, "saida", "arvore")
+
 
 class No:
     def __init__(self, tipo_no, simbolo, producao=None, token=None, filhos=None):
@@ -141,6 +144,45 @@ def imprimirArvore(no, nivel=0):
 
     for filho in no.filhos:
         imprimirArvore(filho, nivel + 1)
+
+# gera gráfico da árvore sintática
+def gerarGraficoArvoreSimplificada(arvoreSimplificada):
+    graf = Digraph()
+
+    def visitar(no, id_pai=None, cont=[0]):
+        id_atual = str(cont[0])
+        cont[0] += 1
+
+        tipo = no.get("tipo")
+
+        match tipo:
+            case "expressao_aritmetica":
+                label = no.get("operador")
+            case "terminal":
+                label = str(no.get("valor"))
+            case "res":
+                label = f"RES({no.get('indice')})"
+            case "sequencia":
+                label = "sequencia"
+            case "fim_programa":
+                label="fim"
+            case _:
+                label = str(tipo)
+
+        graf.node(id_atual, label)
+
+        if id_pai is not None:
+            graf.edge(id_pai, id_atual)
+        if tipo == "sequencia":
+            visitar(no["atual"], id_atual)
+            visitar(no["proximo"], id_atual)
+        elif tipo == "expressao_aritmetica":
+            visitar(no["operandos"][0], id_atual)
+            visitar(no["operandos"][1], id_atual)
+
+    visitar(arvoreSimplificada)
+    graf.render(caminhoGrafico, format="png", view=True)
+    return caminhoGrafico
 
 # salva a árvore convertida em um arquivo JSON
 def salvarArvore(arvore):
