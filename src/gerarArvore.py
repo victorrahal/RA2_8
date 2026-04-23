@@ -28,6 +28,58 @@ def gerarArvore(derivacao): #cria a árvore a partir da derivação recebida
 
     return no
 
+def simplificarArvore(no):
+    if no.tipo_no == "terminal" and no.token:
+        return { # caso terminal
+            "tipo": "terminal",
+            "simbolo": no.simbolo,
+            "valor": no.token.get("valor"),
+            "linha": no.token.get("linha")
+        }
+    match no.simbolo:
+        case "linha":
+            for filho in no.filhos:
+                if filho.simbolo == "corpo":
+                    return simplificarArvore(filho)
+                
+        case "corpo": #para RES
+            if len(no.filhos) == 2:
+                primeiroTermo = no.filhos[0]
+                segundoTermo = no.filhos[1]
+
+                if (primeiroTermo.tipo+no == "terminal" and primeiroTermo.simbolo == "INT" and segundoTermo.tipo_no == "terminal" and segundoTermo.simbolo == "KW_RES"):
+                    return {
+                        "tipo": "res",
+                        "indice": int(primeiroTermo.token.get("valor")),
+                        "linha": primeiroTermo.token.get("linha")
+                    }
+        case "corpo":
+            if len(no.filhos) == 2:
+                esquerdo = simplificarArvore(no.filhos[0])
+                resto = no.filhos[1]
+                if resto.simbolo == "resto_corpo" and len(resto.filhos) == 2:
+                    direito = simplificarArvore(resto.filhos[0])
+                    operador = simplificarArvore(resto.filhos[1])
+                    return {
+                        "tipo": "expressao_aritmetica",
+                        "operador": operador["valor"],
+                        "operandos": [esquerdo, direito],
+                        "linha": esquerdo.get("linha")
+                    }
+                
+        case "operando":
+            if len(no.filhos) == 1:
+                return simplificarArvore(no.filhos[0])
+            
+        case "operador_arit":
+            if len(no.filhos) == 1:
+                return simplificarArvore(no.filhos[0])
+            
+    return {
+        "tipo": no.simbolo,
+        "filhos": [simplificarArvore(filho) for filho in no.filhos]
+    }
+
 # função para converter árvore para dicionário
 def converterArvore(no):
     return {
