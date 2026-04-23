@@ -80,5 +80,4 @@ def lerTokens(arquivo):
 
     # Token de fim de entrada (necessário para o parser)
     tokens.append(criarToken("$", "$", -1))
-
     return tokens

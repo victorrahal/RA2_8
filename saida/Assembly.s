@@ -2,9 +2,6 @@
 .data
 .align 3
 val_1_0: .double 1.0
-val_3_0: .double 3.0
-val_4_0: .double 4.0
-val_5_0: .double 5.0
 resultado_0: .double 0.0
 resultado_1: .double 0.0
 resultado_2: .double 0.0
@@ -30,18 +27,7 @@ resultado_19: .double 0.0
 .fpu vfpv3
 .align 2
 _start:
-LDR R0, =val_3_0
-VLDR.F64 D0, [R0]
-VMOV.F64 D1, D0
-LDR R0, =val_4_0
-VLDR.F64 D0, [R0]
-VADD.F64 D0, D1, D0
-LDR R0, =resultado_0
-VSTR.F64 D0, [R0]
-VMOV.F64 D1, D0
-LDR R0, =val_5_0
-VLDR.F64 D0, [R0]
-VADD.F64 D0, D1, D0
+UDF #2
 LDR R0, =resultado_0
 VSTR.F64 D0, [R0]
     MOV R7, #1

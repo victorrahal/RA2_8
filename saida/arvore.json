@@ -76,170 +76,40 @@
               "tipo_no": "nao_terminal",
               "simbolo": "corpo",
               "producao": [
-                "linha",
+                "INT",
                 "resto_corpo"
               ],
               "token": null,
               "filhos": [
                 {
-                  "tipo_no": "nao_terminal",
-                  "simbolo": "linha",
-                  "producao": [
-                    "LPAREN",
-                    "corpo",
-                    "RPAREN"
-                  ],
-                  "token": null,
-                  "filhos": [
-                    {
-                      "tipo_no": "terminal",
-                      "simbolo": "LPAREN",
-                      "producao": [],
-                      "token": {
-                        "tipo": "LPAREN",
-                        "valor": "(",
-                        "linha": 1
-                      },
-                      "filhos": []
-                    },
-                    {
-                      "tipo_no": "nao_terminal",
-                      "simbolo": "corpo",
-                      "producao": [
-                        "INT",
-                        "resto_corpo"
-                      ],
-                      "token": null,
-                      "filhos": [
-                        {
-                          "tipo_no": "terminal",
-                          "simbolo": "INT",
-                          "producao": [],
-                          "token": {
-                            "tipo": "INT",
-                            "valor": "3",
-                            "linha": 1
-                          },
-                          "filhos": []
-                        },
-                        {
-                          "tipo_no": "nao_terminal",
-                          "simbolo": "resto_corpo",
-                          "producao": [
-                            "operando",
-                            "operador_arit"
-                          ],
-                          "token": null,
-                          "filhos": [
-                            {
-                              "tipo_no": "nao_terminal",
-                              "simbolo": "operando",
-                              "producao": [
-                                "INT"
-                              ],
-                              "token": null,
-                              "filhos": [
-                                {
-                                  "tipo_no": "terminal",
-                                  "simbolo": "INT",
-                                  "producao": [],
-                                  "token": {
-                                    "tipo": "INT",
-                                    "valor": "4",
-                                    "linha": 1
-                                  },
-                                  "filhos": []
-                                }
-                              ]
-                            },
-                            {
-                              "tipo_no": "nao_terminal",
-                              "simbolo": "operador_arit",
-                              "producao": [
-                                "OP_SUM"
-                              ],
-                              "token": null,
-                              "filhos": [
-                                {
-                                  "tipo_no": "terminal",
-                                  "simbolo": "OP_SUM",
-                                  "producao": [],
-                                  "token": {
-                                    "tipo": "OP_SUM",
-                                    "valor": "+",
-                                    "linha": 1
-                                  },
-                                  "filhos": []
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    },
-                    {
-                      "tipo_no": "terminal",
-                      "simbolo": "RPAREN",
-                      "producao": [],
-                      "token": {
-                        "tipo": "RPAREN",
-                        "valor": ")",
-                        "linha": 1
-                      },
-                      "filhos": []
-                    }
-                  ]
+                  "tipo_no": "terminal",
+                  "simbolo": "INT",
+                  "producao": [],
+                  "token": {
+                    "tipo": "INT",
+                    "valor": "3",
+                    "linha": 1
+                  },
+                  "filhos": []
                 },
                 {
                   "tipo_no": "nao_terminal",
                   "simbolo": "resto_corpo",
                   "producao": [
-                    "operando",
-                    "operador_arit"
+                    "KW_RES"
                   ],
                   "token": null,
                   "filhos": [
                     {
-                      "tipo_no": "nao_terminal",
-                      "simbolo": "operando",
-                      "producao": [
-                        "INT"
-                      ],
-                      "token": null,
-                      "filhos": [
-                        {
-                          "tipo_no": "terminal",
-                          "simbolo": "INT",
-                          "producao": [],
-                          "token": {
-                            "tipo": "INT",
-                            "valor": "5",
-                            "linha": 1
-                          },
-                          "filhos": []
-                        }
-                      ]
-                    },
-                    {
-                      "tipo_no": "nao_terminal",
-                      "simbolo": "operador_arit",
-                      "producao": [
-                        "OP_SUM"
-                      ],
-                      "token": null,
-                      "filhos": [
-                        {
-                          "tipo_no": "terminal",
-                          "simbolo": "OP_SUM",
-                          "producao": [],
-                          "token": {
-                            "tipo": "OP_SUM",
-                            "valor": "+",
-                            "linha": 1
-                          },
-                          "filhos": []
-                        }
-                      ]
+                      "tipo_no": "terminal",
+                      "simbolo": "KW_RES",
+                      "producao": [],
+                      "token": {
+                        "tipo": "KW_RES",
+                        "valor": "A",
+                        "linha": 1
+                      },
+                      "filhos": []
                     }
                   ]
                 }

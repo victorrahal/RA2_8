@@ -144,14 +144,10 @@ print("\nDERIVAÇÃO:") # Solta o print da derivação
 for d in derivacao:
     print(d) 
 
-
-pasta = r"C:\Users\joaoh\Documents\GitHub\RA2_8\saida"
-
-os.makedirs(pasta, exist_ok=True)
-
-caminho_arquivo = os.path.join(pasta, "derivacao.json")
+raiz = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+caminho_arquivo = os.path.join(raiz, "saida", "derivacao.json")
 
 with open(caminho_arquivo, "w", encoding="utf-8") as f:
     json.dump(arvore, f, indent=2, ensure_ascii=False)
 
-print("Árvore salva em:", caminho_arquivo)
+print("Derivação salva em:", caminho_arquivo)

@@ -4,7 +4,7 @@ import os
 
 raiz = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 caminhoArvore = os.path.join(raiz, "saida", "arvore.json")
-caminhoArvore_simplificada = os.path.join(raiz, "saida", "arvore_simplficada.json")
+caminhoArvore_simplificada = os.path.join(raiz, "saida", "arvore_simplificada.json")
 caminhoDerivacao = os.path.join(raiz, "saida", "derivacao.json")
 
 class No:
