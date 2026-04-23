@@ -130,6 +130,24 @@ def simplificarArvore(no):
             if len(no.filhos) == 1:
                 return simplificarArvore(no.filhos[0])
             
+        case "condicao":
+            if len(no.filhos) == 5:
+                esquerdo = simplificarArvore(no.filhos[1])
+                direito = simplificarArvore(no.filhos[2])
+                operador = simplificarArvore(no.filhos[3])
+
+                return {
+                    "tipo": "condicao",
+                    "operador": operador["valor"],
+                    "esquerdo": esquerdo,
+                    "direito": direito,
+                    "linha": esquerdo.get("linha")
+                }
+            
+        case "op_rel":
+            if len(no.filhos) == 1:
+                return simplificarArvore(no.filhos[0])
+            
     return {
         "tipo": no.simbolo,
         "filhos": [simplificarArvore(filho) for filho in no.filhos]

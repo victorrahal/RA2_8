@@ -1,0 +1,7 @@
+digraph {
+	0 [label=sequencia]
+	1 [label=corpo]
+	0 -> 1
+	2 [label=fim]
+	0 -> 2
+}

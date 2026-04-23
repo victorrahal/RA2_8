@@ -1,47 +1,73 @@
 {
   "tipo": "sequencia",
   "atual": {
-    "tipo": "atribuicao_memoria",
-    "nome": "VALOR",
-    "valor": {
-      "tipo": "terminal",
-      "simbolo": "REAL",
-      "valor": "42.5",
-      "linha": 2
-    },
-    "linha": 2
-  },
-  "proximo": {
-    "tipo": "sequencia",
-    "atual": {
-      "tipo": "leitura_memoria",
-      "nome": "VALOR",
-      "linha": 3
-    },
-    "proximo": {
-      "tipo": "sequencia",
-      "atual": {
+    "tipo": "corpo",
+    "filhos": [
+      {
+        "tipo": "terminal",
+        "simbolo": "KW_IF",
+        "valor": "IF",
+        "linha": 2
+      },
+      {
+        "tipo": "condicao",
+        "operador": ">",
+        "esquerdo": {
+          "tipo": "terminal",
+          "simbolo": "INT",
+          "valor": "10",
+          "linha": 2
+        },
+        "direito": {
+          "tipo": "terminal",
+          "simbolo": "INT",
+          "valor": "5",
+          "linha": 2
+        },
+        "linha": 2
+      },
+      {
         "tipo": "expressao_aritmetica",
-        "operador": "*",
+        "operador": "+",
         "operandos": [
           {
-            "tipo": "leitura_memoria",
-            "nome": "VALOR",
-            "linha": 4
+            "tipo": "terminal",
+            "simbolo": "REAL",
+            "valor": "1.0",
+            "linha": 2
           },
           {
             "tipo": "terminal",
             "simbolo": "REAL",
             "valor": "2.0",
-            "linha": 4
+            "linha": 2
           }
         ],
-        "linha": 4
+        "linha": 2
       },
-      "proximo": {
-        "tipo": "fim_programa",
-        "linha": 5
+      {
+        "tipo": "expressao_aritmetica",
+        "operador": "-",
+        "operandos": [
+          {
+            "tipo": "terminal",
+            "simbolo": "REAL",
+            "valor": "3.0",
+            "linha": 2
+          },
+          {
+            "tipo": "terminal",
+            "simbolo": "REAL",
+            "valor": "4.0",
+            "linha": 2
+          }
+        ],
+        "linha": 2
       }
-    }
+    ]
+  },
+  "proximo": {
+    "tipo": "fim_programa",
+    "linha": 3
   }
 }
