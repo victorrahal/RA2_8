@@ -1,7 +1,33 @@
-from construirGramatica import construirGramatica
+from construirGramatica import construirGramatica, eh_terminal
 
 EPSILON = "ε"
 EOF = "$"
+
+class No:
+    def __init__(self, simbolo, tipo_no):
+        self.simbolo = simbolo
+        self.tipo_no = tipo_no  # "terminal" ou "nao_terminal"
+        self.producao = None
+        self.token = None
+        self.filhos = []
+
+    def to_dict(self):
+        resultado = {
+            "tipo_no": self.tipo_no,
+            "simbolo": self.simbolo
+        }
+
+        if self.producao:
+            resultado["producao"] = self.producao
+
+        if self.token:
+            resultado["token"] = self.token
+
+        if self.filhos:
+            resultado["filhos"] = [f.to_dict() for f in self.filhos]
+
+        return resultado
+
 
 def validar_terminal(simbolo, tabela):
     nao_terminais = {chave[0] for chave in tabela}
@@ -9,35 +35,39 @@ def validar_terminal(simbolo, tabela):
 
 
 def parsear(tokens, tabela, simbolo_inicial):
-    # 🔹 pilha sintática
     pilha = [EOF, simbolo_inicial]
+    pilha_nos = []
 
-    # 🔹 derivação
     derivacao = []
-
-    # 🔹 ponteiro de entrada
     i = 0
+
+    # 🌳 raiz
+    raiz = No(simbolo_inicial, "nao_terminal")
+    pilha_nos.append(No(EOF, "terminal"))  # dummy
+    pilha_nos.append(raiz)
 
     while pilha:
         if i >= len(tokens):
             raise Exception("Erro sintático: fim inesperado da entrada")
 
         topo = pilha.pop()
-        atual = tokens[i]
+        no_atual = pilha_nos.pop()
 
+        atual = tokens[i]
         tipo_atual = atual["tipo"]
         linha_atual = atual["linha"]
 
         print(f"Topo: {topo} | Token atual: {tipo_atual}")
 
-        # ✅ condição de parada
+        # parada
         if topo == EOF and tipo_atual == EOF:
             break
 
         # ✅ TERMINAL
         if validar_terminal(topo, tabela) or topo == EOF:
             if topo == tipo_atual:
-                i += 1  # consome token
+                no_atual.token = atual  # salva token
+                i += 1
             else:
                 raise Exception(
                     f"Erro sintático na linha {linha_atual}: "
@@ -54,28 +84,53 @@ def parsear(tokens, tabela, simbolo_inicial):
                 # salva derivação
                 derivacao.append(f"{topo} -> {' '.join(prod)}")
 
-                # empilha produção (invertida)
-                for s in reversed(prod):
+                # salva produção no nó
+                no_atual.producao = prod
+
+                filhos = []
+
+                for s in prod:
                     if s != EPSILON:
-                        pilha.append(s)
+                        tipo_no = "terminal" if validar_terminal(s, tabela) else "nao_terminal"
+                        novo = No(s, tipo_no)
+                        filhos.append(novo)
+
+                # conecta filhos
+                no_atual.filhos = filhos
+
+                # empilha reverso
+                for f in reversed(filhos):
+                    pilha.append(f.simbolo)
+                    pilha_nos.append(f)
+
             else:
                 raise Exception(
                     f"Erro sintático na linha {linha_atual}: "
                     f"não há regra para ({topo}, {tipo_atual})"
                 )
 
-    return derivacao
+    return derivacao, raiz.to_dict()
 
 
-# 1. construir gramática (Aluno 1)
+# ================= TESTE =================
+
 info = construirGramatica()
 
-# 2. exemplo de tokens (Aluno 3)
 tokens = [
+    # (START)
     {"tipo": "LPAREN", "valor": "(", "linha": 1},
     {"tipo": "KW_START", "valor": "START", "linha": 1},
     {"tipo": "RPAREN", "valor": ")", "linha": 1},
 
+    # ( 3 RES )
+    {"tipo": "LPAREN", "valor": "(", "linha": 1},
+
+        {"tipo": "KW_MEM", "valor": "3", "linha": 1},
+        {"tipo": "MEM_ID", "valor": "A", "linha": 1},
+
+    {"tipo": "RPAREN", "valor": ")", "linha": 1},
+
+    # (END)
     {"tipo": "LPAREN", "valor": "(", "linha": 1},
     {"tipo": "KW_END", "valor": "END", "linha": 1},
     {"tipo": "RPAREN", "valor": ")", "linha": 1},
@@ -83,9 +138,12 @@ tokens = [
     {"tipo": "$", "valor": "$", "linha": 1},
 ]
 
-# 3. rodar parser
-derivacao = parsear(tokens, info["tabela_ll1"], info["inicio"])
+derivacao, arvore = parsear(tokens, info["tabela_ll1"], info["inicio"])
 
-# 4. saída
+print("\nDERIVAÇÃO:")
 for d in derivacao:
     print(d)
+
+import json
+print("\nÁRVORE:")
+print(json.dumps(arvore, indent=2, ensure_ascii=False))
