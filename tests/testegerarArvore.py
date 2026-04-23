@@ -1,3 +1,4 @@
+# Aluno 4 - Lucas Balint Vilar
 import sys, os, json
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 

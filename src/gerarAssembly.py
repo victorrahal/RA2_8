@@ -86,9 +86,9 @@ def gerarNo_Assembly(no, assembly, contadorPot, numLinhaAtual):
                     assembly.append(f"VSUB.F64 D0, D1, D0") # oepracao de subtração
                 case '*':
                     assembly.append(f"VMUL.F64 D0, D1, D0") # operacao de multiplicação
+                case '|':
+                    assembly.append(f"VDIV.F64 D0, D1, D0") # operação de divisão real
                 case '/':
-                    assembly.append(f"VDIV.F64 D0, D1, D0") # operação de divisão não inteira
-                case '//':
                     assembly.append(f"VDIV.F64 D0, D1, D0") # divisão não inteira
                     assembly.append(f"VCVT.S32.F64 S0, D0") # converte para inteiro, truncando o float
                     assembly.append(f"VCVT.F64.S32 D0, S0") # volta o resultado para double
