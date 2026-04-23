@@ -147,3 +147,12 @@ def salvarArvore(arvore, nomeArquivo="arvore.json"):
         json.dump(converterArvore(arvore), f, indent=2)
 
     return caminho
+
+def salvarArvoreSimplificada(arvoreSimplificada, nomeArquivo="arvore_simplificada.json"):
+    raiz = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+    pastaSaida = os.path.join(raiz, "saida")
+    caminho = os.path.join(pastaSaida, nomeArquivo)
+    with open(caminho, "w") as f:
+        json.dump((arvoreSimplificada), f, indent=2)
+
+    return caminho

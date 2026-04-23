@@ -1,7 +1,7 @@
 import sys, os, json
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from src.gerarArvore import gerarArvore, imprimirArvore, salvarArvore, simplificarArvore
+from src.gerarArvore import gerarArvore, imprimirArvore, salvarArvore, simplificarArvore, salvarArvoreSimplificada
 
 derivacao = {
   "tipo_no": "nao_terminal",
@@ -174,5 +174,8 @@ arvoreSimplificada = simplificarArvore(arvore)
 print('----ARVORE SIMPLIFICADA----')
 print(json.dumps(arvoreSimplificada, indent=2, ensure_ascii=False))
 
-caminho = salvarArvore(arvore)
-print(f"Árvore salva em: {caminho}")
+caminho1 = salvarArvore(arvore)
+print(f"Árvore salva em: {caminho1}")
+
+caminho2 = salvarArvoreSimplificada(arvoreSimplificada)
+print(f"Árvore Simplificada salva em: {caminho2}")

@@ -1,0 +1,12 @@
+{
+  "tipo": "sequencia",
+  "atual": {
+    "tipo": "res",
+    "indice": 3,
+    "linha": 1
+  },
+  "proximo": {
+    "tipo": "fim_programa",
+    "linha": 1
+  }
+}
