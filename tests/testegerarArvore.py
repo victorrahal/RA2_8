@@ -1,21 +1,74 @@
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from src.gerarArvore import No, imprimirArvore, salvarArvore
 
-# gerando árvore manualmente para teste
-# exemplo: (A (C D *) +)
-arvore = No("+", [
-    No("A"),
-    No("*", [
-        No("C"),
-        No("D")
-    ])
-])
+from src.gerarArvore import gerarArvore, imprimirArvore, salvarArvore
 
-print("----ÁRVORE----")
+derivacao = {
+    "tipo_no": "nao_terminal",
+    "simbolo": "linha",
+    "producao": ["LPAREN", "corpo", "RPAREN"],
+    "filhos": [
+        {
+            "tipo_no": "terminal",
+            "simbolo": "LPAREN",
+            "token": {"tipo": "LPAREN", "valor": "(", "linha": 1}
+        },
+        {
+            "tipo_no": "nao_terminal",
+            "simbolo": "corpo",
+            "producao": ["INT", "resto_corpo"],
+            "filhos": [
+                {
+                    "tipo_no": "terminal",
+                    "simbolo": "INT",
+                    "token": {"tipo": "INT", "valor": "3", "linha": 1}
+                },
+                {
+                    "tipo_no": "nao_terminal",
+                    "simbolo": "resto_corpo",
+                    "producao": ["operando", "operador_arit"],
+                    "filhos": [
+                        {
+                            "tipo_no": "nao_terminal",
+                            "simbolo": "operando",
+                            "producao": ["INT"],
+                            "filhos": [
+                                {
+                                    "tipo_no": "terminal",
+                                    "simbolo": "INT",
+                                    "token": {"tipo": "INT", "valor": "4", "linha": 1}
+                                }
+                            ]
+                        },
+                        {
+                            "tipo_no": "nao_terminal",
+                            "simbolo": "operador_arit",
+                            "producao": ["OP_SUM"],
+                            "filhos": [
+                                {
+                                    "tipo_no": "terminal",
+                                    "simbolo": "OP_SUM",
+                                    "token": {"tipo": "OP_SUM", "valor": "+", "linha": 1}
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "tipo_no": "terminal",
+            "simbolo": "RPAREN",
+            "token": {"tipo": "RPAREN", "valor": ")", "linha": 1}
+        }
+    ]
+}
+
+arvore = gerarArvore(derivacao)
+
+print('----ARVORE----')
 imprimirArvore(arvore)
 
-# salvar arquivo json
 caminho = salvarArvore(arvore)
 print(f"Árvore salva em: {caminho}")

@@ -1,22 +1,109 @@
 {
-  "valor": "+",
+  "tipo_no": "nao_terminal",
+  "simbolo": "linha",
+  "producao": [
+    "LPAREN",
+    "corpo",
+    "RPAREN"
+  ],
+  "token": null,
   "filhos": [
     {
-      "valor": "A",
+      "tipo_no": "terminal",
+      "simbolo": "LPAREN",
+      "producao": [],
+      "token": {
+        "tipo": "LPAREN",
+        "valor": "(",
+        "linha": 1
+      },
       "filhos": []
     },
     {
-      "valor": "*",
+      "tipo_no": "nao_terminal",
+      "simbolo": "corpo",
+      "producao": [
+        "INT",
+        "resto_corpo"
+      ],
+      "token": null,
       "filhos": [
         {
-          "valor": "C",
+          "tipo_no": "terminal",
+          "simbolo": "INT",
+          "producao": [],
+          "token": {
+            "tipo": "INT",
+            "valor": "3",
+            "linha": 1
+          },
           "filhos": []
         },
         {
-          "valor": "D",
-          "filhos": []
+          "tipo_no": "nao_terminal",
+          "simbolo": "resto_corpo",
+          "producao": [
+            "operando",
+            "operador_arit"
+          ],
+          "token": null,
+          "filhos": [
+            {
+              "tipo_no": "nao_terminal",
+              "simbolo": "operando",
+              "producao": [
+                "INT"
+              ],
+              "token": null,
+              "filhos": [
+                {
+                  "tipo_no": "terminal",
+                  "simbolo": "INT",
+                  "producao": [],
+                  "token": {
+                    "tipo": "INT",
+                    "valor": "4",
+                    "linha": 1
+                  },
+                  "filhos": []
+                }
+              ]
+            },
+            {
+              "tipo_no": "nao_terminal",
+              "simbolo": "operador_arit",
+              "producao": [
+                "OP_SUM"
+              ],
+              "token": null,
+              "filhos": [
+                {
+                  "tipo_no": "terminal",
+                  "simbolo": "OP_SUM",
+                  "producao": [],
+                  "token": {
+                    "tipo": "OP_SUM",
+                    "valor": "+",
+                    "linha": 1
+                  },
+                  "filhos": []
+                }
+              ]
+            }
+          ]
         }
       ]
+    },
+    {
+      "tipo_no": "terminal",
+      "simbolo": "RPAREN",
+      "producao": [],
+      "token": {
+        "tipo": "RPAREN",
+        "valor": ")",
+        "linha": 1
+      },
+      "filhos": []
     }
   ]
 }
