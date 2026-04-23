@@ -1,5 +1,6 @@
 # João Henrique Tomaz Dutra - Aluno 2
 from construirGramatica import construirGramatica, eh_terminal
+from lerTokens import lerTokens
 import json
 import os
 
@@ -137,6 +138,7 @@ tokens = [
 
     {"tipo": "$", "valor": "$", "linha": 1},
 ]
+
 
 derivacao, arvore = parsear(tokens, info["tabela_ll1"], info["inicio"])
 
