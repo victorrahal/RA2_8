@@ -7,11 +7,11 @@ EPSILON = "ε"
 EOF = "$"
 
 class No:
-    def __init__(self, simbolo, tipo_no):
+    def __init__(self, simbolo,tipo_no):
         self.simbolo = simbolo # guarda o símbolo da gramática
         self.tipo_no = tipo_no  # "terminal" ou "nao_terminal"
         self.producao = None   # pega regra de produção da gramática 
-        self.token = None
+        self.token = None  # tipagem e o valor em si (5)
         self.filhos = []  # listas de nós filhos
 
     def to_dict(self):   # transforma toda ela em um dicionário JSON
