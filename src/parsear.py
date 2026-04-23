@@ -59,8 +59,6 @@ def parsear(tokens, tabela, simbolo_inicial):
         tipo_atual = atual["tipo"]
         linha_atual = atual["linha"]
 
-        print(f"Topo: {topo} | Token atual: {tipo_atual}")
-
         # condição de parada
         if topo == EOF and tipo_atual == EOF:
             break
@@ -112,42 +110,42 @@ def parsear(tokens, tabela, simbolo_inicial):
     return derivacao, raiz.to_dict() # retorna a derivação e a árvore em formato de JSON
 
 
-# ================= TESTE =================
+if __name__ == "__main__":
+    import sys
+    sys.stdout.reconfigure(encoding="utf-8")
 
-info = construirGramatica()
+    info = construirGramatica()
 
-tokens = [
-    # (START)
-    {"tipo": "LPAREN", "valor": "(", "linha": 1},
-    {"tipo": "KW_START", "valor": "START", "linha": 1},
-    {"tipo": "RPAREN", "valor": ")", "linha": 1},
+    tokens = [
+        # (START)
+        {"tipo": "LPAREN", "valor": "(", "linha": 1},
+        {"tipo": "KW_START", "valor": "START", "linha": 1},
+        {"tipo": "RPAREN", "valor": ")", "linha": 1},
 
-    # ( 3 RES )
-    {"tipo": "LPAREN", "valor": "(", "linha": 1},
-
+        # ( 3 RES )
+        {"tipo": "LPAREN", "valor": "(", "linha": 1},
         {"tipo": "INT", "valor": "3", "linha": 1},
-        {"tipo": "KW_RES", "valor": "A", "linha": 1},
+        {"tipo": "KW_RES", "valor": "RES", "linha": 1},
+        {"tipo": "RPAREN", "valor": ")", "linha": 1},
 
-    {"tipo": "RPAREN", "valor": ")", "linha": 1},
+        # (END)
+        {"tipo": "LPAREN", "valor": "(", "linha": 1},
+        {"tipo": "KW_END", "valor": "END", "linha": 1},
+        {"tipo": "RPAREN", "valor": ")", "linha": 1},
 
-    # (END)
-    {"tipo": "LPAREN", "valor": "(", "linha": 1},
-    {"tipo": "KW_END", "valor": "END", "linha": 1},
-    {"tipo": "RPAREN", "valor": ")", "linha": 1},
+        {"tipo": "$", "valor": "$", "linha": 1},
+    ]
 
-    {"tipo": "$", "valor": "$", "linha": 1},
-]
+    derivacao, arvore = parsear(tokens, info["tabela_ll1"], info["inicio"])
 
-derivacao, arvore = parsear(tokens, info["tabela_ll1"], info["inicio"])
+    print("\nDERIVAÇÃO:")
+    for d in derivacao:
+        print(d)
 
-print("\nDERIVAÇÃO:") # Solta o print da derivação 
-for d in derivacao:
-    print(d) 
+    raiz_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+    caminho_arquivo = os.path.join(raiz_dir, "saida", "derivacao.json")
 
-raiz = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-caminho_arquivo = os.path.join(raiz, "saida", "derivacao.json")
+    with open(caminho_arquivo, "w", encoding="utf-8") as f:
+        json.dump(arvore, f, indent=2, ensure_ascii=False)
 
-with open(caminho_arquivo, "w", encoding="utf-8") as f:
-    json.dump(arvore, f, indent=2, ensure_ascii=False)
-
-print("Derivação salva em:", caminho_arquivo)
+    print("Derivação salva em:", caminho_arquivo)
