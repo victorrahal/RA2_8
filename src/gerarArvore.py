@@ -2,6 +2,11 @@
 import json
 import os
 
+raiz = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+caminhoArvore = os.path.join(raiz, "saida", "arvore.json")
+caminhoArvore_simplificada = os.path.join(raiz, "saida", "arvore_simplficada.json")
+caminhoDerivacao = os.path.join(raiz, "saida", "derivacao.json")
+
 class No:
     def __init__(self, tipo_no, simbolo, producao=None, token=None, filhos=None):
         self.tipo_no = tipo_no
@@ -138,21 +143,18 @@ def imprimirArvore(no, nivel=0):
         imprimirArvore(filho, nivel + 1)
 
 # salva a árvore convertida em um arquivo JSON
-def salvarArvore(arvore, nomeArquivo="arvore.json"):
-    raiz = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-    pastaSaida = os.path.join(raiz, "saida")
-    caminho = os.path.join(pastaSaida, nomeArquivo)
-
-    with open(caminho, "w") as f:
+def salvarArvore(arvore):
+    with open(caminhoArvore, "w") as f:
         json.dump(converterArvore(arvore), f, indent=2)
 
-    return caminho
+    return caminhoArvore
 
-def salvarArvoreSimplificada(arvoreSimplificada, nomeArquivo="arvore_simplificada.json"):
-    raiz = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-    pastaSaida = os.path.join(raiz, "saida")
-    caminho = os.path.join(pastaSaida, nomeArquivo)
-    with open(caminho, "w") as f:
+def salvarArvoreSimplificada(arvoreSimplificada):
+    with open(caminhoArvore_simplificada, "w") as f:
         json.dump((arvoreSimplificada), f, indent=2)
 
-    return caminho
+    return caminhoArvore_simplificada
+
+def carregarDerivacao():
+    with open(caminhoDerivacao, 'r') as f:
+        return json.load(f)

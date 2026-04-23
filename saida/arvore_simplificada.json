@@ -1,8 +1,22 @@
 {
   "tipo": "sequencia",
   "atual": {
-    "tipo": "res",
-    "indice": 3,
+    "tipo": "expressao_aritmetica",
+    "operador": "+",
+    "operandos": [
+      {
+        "tipo": "terminal",
+        "simbolo": "INT",
+        "valor": "3",
+        "linha": 1
+      },
+      {
+        "tipo": "terminal",
+        "simbolo": "INT",
+        "valor": "4",
+        "linha": 1
+      }
+    ],
     "linha": 1
   },
   "proximo": {
