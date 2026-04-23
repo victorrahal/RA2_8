@@ -41,9 +41,8 @@ def parsear(tokens, tabela, simbolo_inicial):
     derivacao = []
     i = 0
 
-    # 🌳 raiz
     raiz = No(simbolo_inicial, "nao_terminal")
-    pilha_nos.append(No(EOF, "terminal"))  # dummy
+    pilha_nos.append(No(EOF, "terminal"))  
     pilha_nos.append(raiz)
 
     while pilha:
@@ -63,10 +62,9 @@ def parsear(tokens, tabela, simbolo_inicial):
         if topo == EOF and tipo_atual == EOF:
             break
 
-        # ✅ TERMINAL
         if validar_terminal(topo, tabela) or topo == EOF:
             if topo == tipo_atual:
-                no_atual.token = atual  # salva token
+                no_atual.token = atual  
                 i += 1
             else:
                 raise Exception(
@@ -74,17 +72,16 @@ def parsear(tokens, tabela, simbolo_inicial):
                     f"esperado '{topo}', encontrado '{tipo_atual}'"
                 )
 
-        # ✅ NÃO TERMINAL
+
         else:
             chave = (topo, tipo_atual)
 
             if chave in tabela:
                 prod = tabela[chave]
 
-                # salva derivação
+
                 derivacao.append(f"{topo} -> {' '.join(prod)}")
 
-                # salva produção no nó
                 no_atual.producao = prod
 
                 filhos = []
@@ -95,10 +92,10 @@ def parsear(tokens, tabela, simbolo_inicial):
                         novo = No(s, tipo_no)
                         filhos.append(novo)
 
-                # conecta filhos
+             
                 no_atual.filhos = filhos
 
-                # empilha reverso
+               
                 for f in reversed(filhos):
                     pilha.append(f.simbolo)
                     pilha_nos.append(f)
