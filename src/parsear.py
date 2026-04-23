@@ -3,6 +3,7 @@ from construirGramatica import construirGramatica, eh_terminal
 from lerTokens import lerTokens
 import json
 import os
+raiz = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 
 EPSILON = "ε"
@@ -140,7 +141,8 @@ tokens = [
     {"tipo": "$", "valor": "$", "linha": 1},
 ]
 
-tokens2 = lerTokens(r'C:\Users\joaoh\Documents\GitHub\RA2_8\testes\teste1.txt')
+caminho_tokens = os.path.join(raiz, "testes", "teste1.txt")
+tokens2 = lerTokens(caminho_tokens)
 
 derivacao, arvore = parsear(tokens2, info["tabela_ll1"], info["inicio"])
 
@@ -148,7 +150,6 @@ print("\nDERIVAÇÃO:") # Solta o print da derivação
 for d in derivacao:
     print(d) 
 
-raiz = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 caminho_arquivo = os.path.join(raiz, "saida", "derivacao.json")
 
 with open(caminho_arquivo, "w", encoding="utf-8") as f:

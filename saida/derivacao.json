@@ -65,40 +65,54 @@
               "tipo_no": "nao_terminal",
               "simbolo": "corpo",
               "producao": [
-                "REAL",
-                "resto_corpo"
+                "KW_IF",
+                "condicao",
+                "linha",
+                "linha"
               ],
               "filhos": [
                 {
                   "tipo_no": "terminal",
-                  "simbolo": "REAL",
+                  "simbolo": "KW_IF",
                   "token": {
-                    "tipo": "REAL",
-                    "valor": "3.0",
+                    "tipo": "KW_IF",
+                    "valor": "IF",
                     "linha": 2
                   }
                 },
                 {
                   "tipo_no": "nao_terminal",
-                  "simbolo": "resto_corpo",
+                  "simbolo": "condicao",
                   "producao": [
+                    "LPAREN",
                     "operando",
-                    "operador_arit"
+                    "operando",
+                    "op_rel",
+                    "RPAREN"
                   ],
                   "filhos": [
+                    {
+                      "tipo_no": "terminal",
+                      "simbolo": "LPAREN",
+                      "token": {
+                        "tipo": "LPAREN",
+                        "valor": "(",
+                        "linha": 2
+                      }
+                    },
                     {
                       "tipo_no": "nao_terminal",
                       "simbolo": "operando",
                       "producao": [
-                        "REAL"
+                        "INT"
                       ],
                       "filhos": [
                         {
                           "tipo_no": "terminal",
-                          "simbolo": "REAL",
+                          "simbolo": "INT",
                           "token": {
-                            "tipo": "REAL",
-                            "valor": "4.0",
+                            "tipo": "INT",
+                            "valor": "10",
                             "linha": 2
                           }
                         }
@@ -106,21 +120,236 @@
                     },
                     {
                       "tipo_no": "nao_terminal",
-                      "simbolo": "operador_arit",
+                      "simbolo": "operando",
                       "producao": [
-                        "OP_SUM"
+                        "INT"
                       ],
                       "filhos": [
                         {
                           "tipo_no": "terminal",
-                          "simbolo": "OP_SUM",
+                          "simbolo": "INT",
                           "token": {
-                            "tipo": "OP_SUM",
-                            "valor": "+",
+                            "tipo": "INT",
+                            "valor": "5",
                             "linha": 2
                           }
                         }
                       ]
+                    },
+                    {
+                      "tipo_no": "nao_terminal",
+                      "simbolo": "op_rel",
+                      "producao": [
+                        "OP_GT"
+                      ],
+                      "filhos": [
+                        {
+                          "tipo_no": "terminal",
+                          "simbolo": "OP_GT",
+                          "token": {
+                            "tipo": "OP_GT",
+                            "valor": ">",
+                            "linha": 2
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "tipo_no": "terminal",
+                      "simbolo": "RPAREN",
+                      "token": {
+                        "tipo": "RPAREN",
+                        "valor": ")",
+                        "linha": 2
+                      }
+                    }
+                  ]
+                },
+                {
+                  "tipo_no": "nao_terminal",
+                  "simbolo": "linha",
+                  "producao": [
+                    "LPAREN",
+                    "corpo",
+                    "RPAREN"
+                  ],
+                  "filhos": [
+                    {
+                      "tipo_no": "terminal",
+                      "simbolo": "LPAREN",
+                      "token": {
+                        "tipo": "LPAREN",
+                        "valor": "(",
+                        "linha": 2
+                      }
+                    },
+                    {
+                      "tipo_no": "nao_terminal",
+                      "simbolo": "corpo",
+                      "producao": [
+                        "REAL",
+                        "resto_corpo"
+                      ],
+                      "filhos": [
+                        {
+                          "tipo_no": "terminal",
+                          "simbolo": "REAL",
+                          "token": {
+                            "tipo": "REAL",
+                            "valor": "1.0",
+                            "linha": 2
+                          }
+                        },
+                        {
+                          "tipo_no": "nao_terminal",
+                          "simbolo": "resto_corpo",
+                          "producao": [
+                            "operando",
+                            "operador_arit"
+                          ],
+                          "filhos": [
+                            {
+                              "tipo_no": "nao_terminal",
+                              "simbolo": "operando",
+                              "producao": [
+                                "REAL"
+                              ],
+                              "filhos": [
+                                {
+                                  "tipo_no": "terminal",
+                                  "simbolo": "REAL",
+                                  "token": {
+                                    "tipo": "REAL",
+                                    "valor": "2.0",
+                                    "linha": 2
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "tipo_no": "nao_terminal",
+                              "simbolo": "operador_arit",
+                              "producao": [
+                                "OP_SUM"
+                              ],
+                              "filhos": [
+                                {
+                                  "tipo_no": "terminal",
+                                  "simbolo": "OP_SUM",
+                                  "token": {
+                                    "tipo": "OP_SUM",
+                                    "valor": "+",
+                                    "linha": 2
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tipo_no": "terminal",
+                      "simbolo": "RPAREN",
+                      "token": {
+                        "tipo": "RPAREN",
+                        "valor": ")",
+                        "linha": 2
+                      }
+                    }
+                  ]
+                },
+                {
+                  "tipo_no": "nao_terminal",
+                  "simbolo": "linha",
+                  "producao": [
+                    "LPAREN",
+                    "corpo",
+                    "RPAREN"
+                  ],
+                  "filhos": [
+                    {
+                      "tipo_no": "terminal",
+                      "simbolo": "LPAREN",
+                      "token": {
+                        "tipo": "LPAREN",
+                        "valor": "(",
+                        "linha": 2
+                      }
+                    },
+                    {
+                      "tipo_no": "nao_terminal",
+                      "simbolo": "corpo",
+                      "producao": [
+                        "REAL",
+                        "resto_corpo"
+                      ],
+                      "filhos": [
+                        {
+                          "tipo_no": "terminal",
+                          "simbolo": "REAL",
+                          "token": {
+                            "tipo": "REAL",
+                            "valor": "3.0",
+                            "linha": 2
+                          }
+                        },
+                        {
+                          "tipo_no": "nao_terminal",
+                          "simbolo": "resto_corpo",
+                          "producao": [
+                            "operando",
+                            "operador_arit"
+                          ],
+                          "filhos": [
+                            {
+                              "tipo_no": "nao_terminal",
+                              "simbolo": "operando",
+                              "producao": [
+                                "REAL"
+                              ],
+                              "filhos": [
+                                {
+                                  "tipo_no": "terminal",
+                                  "simbolo": "REAL",
+                                  "token": {
+                                    "tipo": "REAL",
+                                    "valor": "4.0",
+                                    "linha": 2
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "tipo_no": "nao_terminal",
+                              "simbolo": "operador_arit",
+                              "producao": [
+                                "OP_SUB"
+                              ],
+                              "filhos": [
+                                {
+                                  "tipo_no": "terminal",
+                                  "simbolo": "OP_SUB",
+                                  "token": {
+                                    "tipo": "OP_SUB",
+                                    "valor": "-",
+                                    "linha": 2
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tipo_no": "terminal",
+                      "simbolo": "RPAREN",
+                      "token": {
+                        "tipo": "RPAREN",
+                        "valor": ")",
+                        "linha": 2
+                      }
                     }
                   ]
                 }
@@ -156,75 +385,18 @@
                   "tipo_no": "nao_terminal",
                   "simbolo": "linhas_rest",
                   "producao": [
-                    "corpo",
-                    "RPAREN",
-                    "linhas"
+                    "KW_END",
+                    "RPAREN"
                   ],
                   "filhos": [
                     {
-                      "tipo_no": "nao_terminal",
-                      "simbolo": "corpo",
-                      "producao": [
-                        "INT",
-                        "resto_corpo"
-                      ],
-                      "filhos": [
-                        {
-                          "tipo_no": "terminal",
-                          "simbolo": "INT",
-                          "token": {
-                            "tipo": "INT",
-                            "valor": "10",
-                            "linha": 3
-                          }
-                        },
-                        {
-                          "tipo_no": "nao_terminal",
-                          "simbolo": "resto_corpo",
-                          "producao": [
-                            "operando",
-                            "operador_arit"
-                          ],
-                          "filhos": [
-                            {
-                              "tipo_no": "nao_terminal",
-                              "simbolo": "operando",
-                              "producao": [
-                                "INT"
-                              ],
-                              "filhos": [
-                                {
-                                  "tipo_no": "terminal",
-                                  "simbolo": "INT",
-                                  "token": {
-                                    "tipo": "INT",
-                                    "valor": "2",
-                                    "linha": 3
-                                  }
-                                }
-                              ]
-                            },
-                            {
-                              "tipo_no": "nao_terminal",
-                              "simbolo": "operador_arit",
-                              "producao": [
-                                "OP_SUB"
-                              ],
-                              "filhos": [
-                                {
-                                  "tipo_no": "terminal",
-                                  "simbolo": "OP_SUB",
-                                  "token": {
-                                    "tipo": "OP_SUB",
-                                    "valor": "-",
-                                    "linha": 3
-                                  }
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
+                      "tipo_no": "terminal",
+                      "simbolo": "KW_END",
+                      "token": {
+                        "tipo": "KW_END",
+                        "valor": "END",
+                        "linha": 3
+                      }
                     },
                     {
                       "tipo_no": "terminal",
@@ -234,1795 +406,6 @@
                         "valor": ")",
                         "linha": 3
                       }
-                    },
-                    {
-                      "tipo_no": "nao_terminal",
-                      "simbolo": "linhas",
-                      "producao": [
-                        "LPAREN",
-                        "linhas_rest"
-                      ],
-                      "filhos": [
-                        {
-                          "tipo_no": "terminal",
-                          "simbolo": "LPAREN",
-                          "token": {
-                            "tipo": "LPAREN",
-                            "valor": "(",
-                            "linha": 4
-                          }
-                        },
-                        {
-                          "tipo_no": "nao_terminal",
-                          "simbolo": "linhas_rest",
-                          "producao": [
-                            "corpo",
-                            "RPAREN",
-                            "linhas"
-                          ],
-                          "filhos": [
-                            {
-                              "tipo_no": "nao_terminal",
-                              "simbolo": "corpo",
-                              "producao": [
-                                "REAL",
-                                "resto_corpo"
-                              ],
-                              "filhos": [
-                                {
-                                  "tipo_no": "terminal",
-                                  "simbolo": "REAL",
-                                  "token": {
-                                    "tipo": "REAL",
-                                    "valor": "5.0",
-                                    "linha": 4
-                                  }
-                                },
-                                {
-                                  "tipo_no": "nao_terminal",
-                                  "simbolo": "resto_corpo",
-                                  "producao": [
-                                    "operando",
-                                    "operador_arit"
-                                  ],
-                                  "filhos": [
-                                    {
-                                      "tipo_no": "nao_terminal",
-                                      "simbolo": "operando",
-                                      "producao": [
-                                        "REAL"
-                                      ],
-                                      "filhos": [
-                                        {
-                                          "tipo_no": "terminal",
-                                          "simbolo": "REAL",
-                                          "token": {
-                                            "tipo": "REAL",
-                                            "valor": "6.0",
-                                            "linha": 4
-                                          }
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "tipo_no": "nao_terminal",
-                                      "simbolo": "operador_arit",
-                                      "producao": [
-                                        "OP_MUL"
-                                      ],
-                                      "filhos": [
-                                        {
-                                          "tipo_no": "terminal",
-                                          "simbolo": "OP_MUL",
-                                          "token": {
-                                            "tipo": "OP_MUL",
-                                            "valor": "*",
-                                            "linha": 4
-                                          }
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            },
-                            {
-                              "tipo_no": "terminal",
-                              "simbolo": "RPAREN",
-                              "token": {
-                                "tipo": "RPAREN",
-                                "valor": ")",
-                                "linha": 4
-                              }
-                            },
-                            {
-                              "tipo_no": "nao_terminal",
-                              "simbolo": "linhas",
-                              "producao": [
-                                "LPAREN",
-                                "linhas_rest"
-                              ],
-                              "filhos": [
-                                {
-                                  "tipo_no": "terminal",
-                                  "simbolo": "LPAREN",
-                                  "token": {
-                                    "tipo": "LPAREN",
-                                    "valor": "(",
-                                    "linha": 5
-                                  }
-                                },
-                                {
-                                  "tipo_no": "nao_terminal",
-                                  "simbolo": "linhas_rest",
-                                  "producao": [
-                                    "corpo",
-                                    "RPAREN",
-                                    "linhas"
-                                  ],
-                                  "filhos": [
-                                    {
-                                      "tipo_no": "nao_terminal",
-                                      "simbolo": "corpo",
-                                      "producao": [
-                                        "REAL",
-                                        "resto_corpo"
-                                      ],
-                                      "filhos": [
-                                        {
-                                          "tipo_no": "terminal",
-                                          "simbolo": "REAL",
-                                          "token": {
-                                            "tipo": "REAL",
-                                            "valor": "8.0",
-                                            "linha": 5
-                                          }
-                                        },
-                                        {
-                                          "tipo_no": "nao_terminal",
-                                          "simbolo": "resto_corpo",
-                                          "producao": [
-                                            "operando",
-                                            "operador_arit"
-                                          ],
-                                          "filhos": [
-                                            {
-                                              "tipo_no": "nao_terminal",
-                                              "simbolo": "operando",
-                                              "producao": [
-                                                "REAL"
-                                              ],
-                                              "filhos": [
-                                                {
-                                                  "tipo_no": "terminal",
-                                                  "simbolo": "REAL",
-                                                  "token": {
-                                                    "tipo": "REAL",
-                                                    "valor": "2.0",
-                                                    "linha": 5
-                                                  }
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "tipo_no": "nao_terminal",
-                                              "simbolo": "operador_arit",
-                                              "producao": [
-                                                "OP_DIVR"
-                                              ],
-                                              "filhos": [
-                                                {
-                                                  "tipo_no": "terminal",
-                                                  "simbolo": "OP_DIVR",
-                                                  "token": {
-                                                    "tipo": "OP_DIVR",
-                                                    "valor": "|",
-                                                    "linha": 5
-                                                  }
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "tipo_no": "terminal",
-                                      "simbolo": "RPAREN",
-                                      "token": {
-                                        "tipo": "RPAREN",
-                                        "valor": ")",
-                                        "linha": 5
-                                      }
-                                    },
-                                    {
-                                      "tipo_no": "nao_terminal",
-                                      "simbolo": "linhas",
-                                      "producao": [
-                                        "LPAREN",
-                                        "linhas_rest"
-                                      ],
-                                      "filhos": [
-                                        {
-                                          "tipo_no": "terminal",
-                                          "simbolo": "LPAREN",
-                                          "token": {
-                                            "tipo": "LPAREN",
-                                            "valor": "(",
-                                            "linha": 6
-                                          }
-                                        },
-                                        {
-                                          "tipo_no": "nao_terminal",
-                                          "simbolo": "linhas_rest",
-                                          "producao": [
-                                            "corpo",
-                                            "RPAREN",
-                                            "linhas"
-                                          ],
-                                          "filhos": [
-                                            {
-                                              "tipo_no": "nao_terminal",
-                                              "simbolo": "corpo",
-                                              "producao": [
-                                                "INT",
-                                                "resto_corpo"
-                                              ],
-                                              "filhos": [
-                                                {
-                                                  "tipo_no": "terminal",
-                                                  "simbolo": "INT",
-                                                  "token": {
-                                                    "tipo": "INT",
-                                                    "valor": "9",
-                                                    "linha": 6
-                                                  }
-                                                },
-                                                {
-                                                  "tipo_no": "nao_terminal",
-                                                  "simbolo": "resto_corpo",
-                                                  "producao": [
-                                                    "operando",
-                                                    "operador_arit"
-                                                  ],
-                                                  "filhos": [
-                                                    {
-                                                      "tipo_no": "nao_terminal",
-                                                      "simbolo": "operando",
-                                                      "producao": [
-                                                        "INT"
-                                                      ],
-                                                      "filhos": [
-                                                        {
-                                                          "tipo_no": "terminal",
-                                                          "simbolo": "INT",
-                                                          "token": {
-                                                            "tipo": "INT",
-                                                            "valor": "4",
-                                                            "linha": 6
-                                                          }
-                                                        }
-                                                      ]
-                                                    },
-                                                    {
-                                                      "tipo_no": "nao_terminal",
-                                                      "simbolo": "operador_arit",
-                                                      "producao": [
-                                                        "OP_DIVI"
-                                                      ],
-                                                      "filhos": [
-                                                        {
-                                                          "tipo_no": "terminal",
-                                                          "simbolo": "OP_DIVI",
-                                                          "token": {
-                                                            "tipo": "OP_DIVI",
-                                                            "valor": "/",
-                                                            "linha": 6
-                                                          }
-                                                        }
-                                                      ]
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "tipo_no": "terminal",
-                                              "simbolo": "RPAREN",
-                                              "token": {
-                                                "tipo": "RPAREN",
-                                                "valor": ")",
-                                                "linha": 6
-                                              }
-                                            },
-                                            {
-                                              "tipo_no": "nao_terminal",
-                                              "simbolo": "linhas",
-                                              "producao": [
-                                                "LPAREN",
-                                                "linhas_rest"
-                                              ],
-                                              "filhos": [
-                                                {
-                                                  "tipo_no": "terminal",
-                                                  "simbolo": "LPAREN",
-                                                  "token": {
-                                                    "tipo": "LPAREN",
-                                                    "valor": "(",
-                                                    "linha": 7
-                                                  }
-                                                },
-                                                {
-                                                  "tipo_no": "nao_terminal",
-                                                  "simbolo": "linhas_rest",
-                                                  "producao": [
-                                                    "corpo",
-                                                    "RPAREN",
-                                                    "linhas"
-                                                  ],
-                                                  "filhos": [
-                                                    {
-                                                      "tipo_no": "nao_terminal",
-                                                      "simbolo": "corpo",
-                                                      "producao": [
-                                                        "INT",
-                                                        "resto_corpo"
-                                                      ],
-                                                      "filhos": [
-                                                        {
-                                                          "tipo_no": "terminal",
-                                                          "simbolo": "INT",
-                                                          "token": {
-                                                            "tipo": "INT",
-                                                            "valor": "9",
-                                                            "linha": 7
-                                                          }
-                                                        },
-                                                        {
-                                                          "tipo_no": "nao_terminal",
-                                                          "simbolo": "resto_corpo",
-                                                          "producao": [
-                                                            "operando",
-                                                            "operador_arit"
-                                                          ],
-                                                          "filhos": [
-                                                            {
-                                                              "tipo_no": "nao_terminal",
-                                                              "simbolo": "operando",
-                                                              "producao": [
-                                                                "INT"
-                                                              ],
-                                                              "filhos": [
-                                                                {
-                                                                  "tipo_no": "terminal",
-                                                                  "simbolo": "INT",
-                                                                  "token": {
-                                                                    "tipo": "INT",
-                                                                    "valor": "4",
-                                                                    "linha": 7
-                                                                  }
-                                                                }
-                                                              ]
-                                                            },
-                                                            {
-                                                              "tipo_no": "nao_terminal",
-                                                              "simbolo": "operador_arit",
-                                                              "producao": [
-                                                                "OP_MOD"
-                                                              ],
-                                                              "filhos": [
-                                                                {
-                                                                  "tipo_no": "terminal",
-                                                                  "simbolo": "OP_MOD",
-                                                                  "token": {
-                                                                    "tipo": "OP_MOD",
-                                                                    "valor": "%",
-                                                                    "linha": 7
-                                                                  }
-                                                                }
-                                                              ]
-                                                            }
-                                                          ]
-                                                        }
-                                                      ]
-                                                    },
-                                                    {
-                                                      "tipo_no": "terminal",
-                                                      "simbolo": "RPAREN",
-                                                      "token": {
-                                                        "tipo": "RPAREN",
-                                                        "valor": ")",
-                                                        "linha": 7
-                                                      }
-                                                    },
-                                                    {
-                                                      "tipo_no": "nao_terminal",
-                                                      "simbolo": "linhas",
-                                                      "producao": [
-                                                        "LPAREN",
-                                                        "linhas_rest"
-                                                      ],
-                                                      "filhos": [
-                                                        {
-                                                          "tipo_no": "terminal",
-                                                          "simbolo": "LPAREN",
-                                                          "token": {
-                                                            "tipo": "LPAREN",
-                                                            "valor": "(",
-                                                            "linha": 8
-                                                          }
-                                                        },
-                                                        {
-                                                          "tipo_no": "nao_terminal",
-                                                          "simbolo": "linhas_rest",
-                                                          "producao": [
-                                                            "corpo",
-                                                            "RPAREN",
-                                                            "linhas"
-                                                          ],
-                                                          "filhos": [
-                                                            {
-                                                              "tipo_no": "nao_terminal",
-                                                              "simbolo": "corpo",
-                                                              "producao": [
-                                                                "REAL",
-                                                                "resto_corpo"
-                                                              ],
-                                                              "filhos": [
-                                                                {
-                                                                  "tipo_no": "terminal",
-                                                                  "simbolo": "REAL",
-                                                                  "token": {
-                                                                    "tipo": "REAL",
-                                                                    "valor": "2.0",
-                                                                    "linha": 8
-                                                                  }
-                                                                },
-                                                                {
-                                                                  "tipo_no": "nao_terminal",
-                                                                  "simbolo": "resto_corpo",
-                                                                  "producao": [
-                                                                    "operando",
-                                                                    "operador_arit"
-                                                                  ],
-                                                                  "filhos": [
-                                                                    {
-                                                                      "tipo_no": "nao_terminal",
-                                                                      "simbolo": "operando",
-                                                                      "producao": [
-                                                                        "INT"
-                                                                      ],
-                                                                      "filhos": [
-                                                                        {
-                                                                          "tipo_no": "terminal",
-                                                                          "simbolo": "INT",
-                                                                          "token": {
-                                                                            "tipo": "INT",
-                                                                            "valor": "3",
-                                                                            "linha": 8
-                                                                          }
-                                                                        }
-                                                                      ]
-                                                                    },
-                                                                    {
-                                                                      "tipo_no": "nao_terminal",
-                                                                      "simbolo": "operador_arit",
-                                                                      "producao": [
-                                                                        "OP_POW"
-                                                                      ],
-                                                                      "filhos": [
-                                                                        {
-                                                                          "tipo_no": "terminal",
-                                                                          "simbolo": "OP_POW",
-                                                                          "token": {
-                                                                            "tipo": "OP_POW",
-                                                                            "valor": "^",
-                                                                            "linha": 8
-                                                                          }
-                                                                        }
-                                                                      ]
-                                                                    }
-                                                                  ]
-                                                                }
-                                                              ]
-                                                            },
-                                                            {
-                                                              "tipo_no": "terminal",
-                                                              "simbolo": "RPAREN",
-                                                              "token": {
-                                                                "tipo": "RPAREN",
-                                                                "valor": ")",
-                                                                "linha": 8
-                                                              }
-                                                            },
-                                                            {
-                                                              "tipo_no": "nao_terminal",
-                                                              "simbolo": "linhas",
-                                                              "producao": [
-                                                                "LPAREN",
-                                                                "linhas_rest"
-                                                              ],
-                                                              "filhos": [
-                                                                {
-                                                                  "tipo_no": "terminal",
-                                                                  "simbolo": "LPAREN",
-                                                                  "token": {
-                                                                    "tipo": "LPAREN",
-                                                                    "valor": "(",
-                                                                    "linha": 9
-                                                                  }
-                                                                },
-                                                                {
-                                                                  "tipo_no": "nao_terminal",
-                                                                  "simbolo": "linhas_rest",
-                                                                  "producao": [
-                                                                    "corpo",
-                                                                    "RPAREN",
-                                                                    "linhas"
-                                                                  ],
-                                                                  "filhos": [
-                                                                    {
-                                                                      "tipo_no": "nao_terminal",
-                                                                      "simbolo": "corpo",
-                                                                      "producao": [
-                                                                        "INT",
-                                                                        "resto_corpo"
-                                                                      ],
-                                                                      "filhos": [
-                                                                        {
-                                                                          "tipo_no": "terminal",
-                                                                          "simbolo": "INT",
-                                                                          "token": {
-                                                                            "tipo": "INT",
-                                                                            "valor": "1",
-                                                                            "linha": 9
-                                                                          }
-                                                                        },
-                                                                        {
-                                                                          "tipo_no": "nao_terminal",
-                                                                          "simbolo": "resto_corpo",
-                                                                          "producao": [
-                                                                            "KW_RES"
-                                                                          ],
-                                                                          "filhos": [
-                                                                            {
-                                                                              "tipo_no": "terminal",
-                                                                              "simbolo": "KW_RES",
-                                                                              "token": {
-                                                                                "tipo": "KW_RES",
-                                                                                "valor": "RES",
-                                                                                "linha": 9
-                                                                              }
-                                                                            }
-                                                                          ]
-                                                                        }
-                                                                      ]
-                                                                    },
-                                                                    {
-                                                                      "tipo_no": "terminal",
-                                                                      "simbolo": "RPAREN",
-                                                                      "token": {
-                                                                        "tipo": "RPAREN",
-                                                                        "valor": ")",
-                                                                        "linha": 9
-                                                                      }
-                                                                    },
-                                                                    {
-                                                                      "tipo_no": "nao_terminal",
-                                                                      "simbolo": "linhas",
-                                                                      "producao": [
-                                                                        "LPAREN",
-                                                                        "linhas_rest"
-                                                                      ],
-                                                                      "filhos": [
-                                                                        {
-                                                                          "tipo_no": "terminal",
-                                                                          "simbolo": "LPAREN",
-                                                                          "token": {
-                                                                            "tipo": "LPAREN",
-                                                                            "valor": "(",
-                                                                            "linha": 10
-                                                                          }
-                                                                        },
-                                                                        {
-                                                                          "tipo_no": "nao_terminal",
-                                                                          "simbolo": "linhas_rest",
-                                                                          "producao": [
-                                                                            "corpo",
-                                                                            "RPAREN",
-                                                                            "linhas"
-                                                                          ],
-                                                                          "filhos": [
-                                                                            {
-                                                                              "tipo_no": "nao_terminal",
-                                                                              "simbolo": "corpo",
-                                                                              "producao": [
-                                                                                "REAL",
-                                                                                "resto_corpo"
-                                                                              ],
-                                                                              "filhos": [
-                                                                                {
-                                                                                  "tipo_no": "terminal",
-                                                                                  "simbolo": "REAL",
-                                                                                  "token": {
-                                                                                    "tipo": "REAL",
-                                                                                    "valor": "42.5",
-                                                                                    "linha": 10
-                                                                                  }
-                                                                                },
-                                                                                {
-                                                                                  "tipo_no": "nao_terminal",
-                                                                                  "simbolo": "resto_corpo",
-                                                                                  "producao": [
-                                                                                    "KW_MEM",
-                                                                                    "MEM_ID"
-                                                                                  ],
-                                                                                  "filhos": [
-                                                                                    {
-                                                                                      "tipo_no": "terminal",
-                                                                                      "simbolo": "KW_MEM",
-                                                                                      "token": {
-                                                                                        "tipo": "KW_MEM",
-                                                                                        "valor": "MEM",
-                                                                                        "linha": 10
-                                                                                      }
-                                                                                    },
-                                                                                    {
-                                                                                      "tipo_no": "terminal",
-                                                                                      "simbolo": "MEM_ID",
-                                                                                      "token": {
-                                                                                        "tipo": "MEM_ID",
-                                                                                        "valor": "VALOR",
-                                                                                        "linha": 10
-                                                                                      }
-                                                                                    }
-                                                                                  ]
-                                                                                }
-                                                                              ]
-                                                                            },
-                                                                            {
-                                                                              "tipo_no": "terminal",
-                                                                              "simbolo": "RPAREN",
-                                                                              "token": {
-                                                                                "tipo": "RPAREN",
-                                                                                "valor": ")",
-                                                                                "linha": 10
-                                                                              }
-                                                                            },
-                                                                            {
-                                                                              "tipo_no": "nao_terminal",
-                                                                              "simbolo": "linhas",
-                                                                              "producao": [
-                                                                                "LPAREN",
-                                                                                "linhas_rest"
-                                                                              ],
-                                                                              "filhos": [
-                                                                                {
-                                                                                  "tipo_no": "terminal",
-                                                                                  "simbolo": "LPAREN",
-                                                                                  "token": {
-                                                                                    "tipo": "LPAREN",
-                                                                                    "valor": "(",
-                                                                                    "linha": 11
-                                                                                  }
-                                                                                },
-                                                                                {
-                                                                                  "tipo_no": "nao_terminal",
-                                                                                  "simbolo": "linhas_rest",
-                                                                                  "producao": [
-                                                                                    "corpo",
-                                                                                    "RPAREN",
-                                                                                    "linhas"
-                                                                                  ],
-                                                                                  "filhos": [
-                                                                                    {
-                                                                                      "tipo_no": "nao_terminal",
-                                                                                      "simbolo": "corpo",
-                                                                                      "producao": [
-                                                                                        "MEM_ID",
-                                                                                        "cauda_mem"
-                                                                                      ],
-                                                                                      "filhos": [
-                                                                                        {
-                                                                                          "tipo_no": "terminal",
-                                                                                          "simbolo": "MEM_ID",
-                                                                                          "token": {
-                                                                                            "tipo": "MEM_ID",
-                                                                                            "valor": "VALOR",
-                                                                                            "linha": 11
-                                                                                          }
-                                                                                        },
-                                                                                        {
-                                                                                          "tipo_no": "nao_terminal",
-                                                                                          "simbolo": "cauda_mem",
-                                                                                          "producao": [
-                                                                                            "ε"
-                                                                                          ]
-                                                                                        }
-                                                                                      ]
-                                                                                    },
-                                                                                    {
-                                                                                      "tipo_no": "terminal",
-                                                                                      "simbolo": "RPAREN",
-                                                                                      "token": {
-                                                                                        "tipo": "RPAREN",
-                                                                                        "valor": ")",
-                                                                                        "linha": 11
-                                                                                      }
-                                                                                    },
-                                                                                    {
-                                                                                      "tipo_no": "nao_terminal",
-                                                                                      "simbolo": "linhas",
-                                                                                      "producao": [
-                                                                                        "LPAREN",
-                                                                                        "linhas_rest"
-                                                                                      ],
-                                                                                      "filhos": [
-                                                                                        {
-                                                                                          "tipo_no": "terminal",
-                                                                                          "simbolo": "LPAREN",
-                                                                                          "token": {
-                                                                                            "tipo": "LPAREN",
-                                                                                            "valor": "(",
-                                                                                            "linha": 12
-                                                                                          }
-                                                                                        },
-                                                                                        {
-                                                                                          "tipo_no": "nao_terminal",
-                                                                                          "simbolo": "linhas_rest",
-                                                                                          "producao": [
-                                                                                            "corpo",
-                                                                                            "RPAREN",
-                                                                                            "linhas"
-                                                                                          ],
-                                                                                          "filhos": [
-                                                                                            {
-                                                                                              "tipo_no": "nao_terminal",
-                                                                                              "simbolo": "corpo",
-                                                                                              "producao": [
-                                                                                                "linha",
-                                                                                                "resto_corpo"
-                                                                                              ],
-                                                                                              "filhos": [
-                                                                                                {
-                                                                                                  "tipo_no": "nao_terminal",
-                                                                                                  "simbolo": "linha",
-                                                                                                  "producao": [
-                                                                                                    "LPAREN",
-                                                                                                    "corpo",
-                                                                                                    "RPAREN"
-                                                                                                  ],
-                                                                                                  "filhos": [
-                                                                                                    {
-                                                                                                      "tipo_no": "terminal",
-                                                                                                      "simbolo": "LPAREN",
-                                                                                                      "token": {
-                                                                                                        "tipo": "LPAREN",
-                                                                                                        "valor": "(",
-                                                                                                        "linha": 12
-                                                                                                      }
-                                                                                                    },
-                                                                                                    {
-                                                                                                      "tipo_no": "nao_terminal",
-                                                                                                      "simbolo": "corpo",
-                                                                                                      "producao": [
-                                                                                                        "MEM_ID",
-                                                                                                        "cauda_mem"
-                                                                                                      ],
-                                                                                                      "filhos": [
-                                                                                                        {
-                                                                                                          "tipo_no": "terminal",
-                                                                                                          "simbolo": "MEM_ID",
-                                                                                                          "token": {
-                                                                                                            "tipo": "MEM_ID",
-                                                                                                            "valor": "VALOR",
-                                                                                                            "linha": 12
-                                                                                                          }
-                                                                                                        },
-                                                                                                        {
-                                                                                                          "tipo_no": "nao_terminal",
-                                                                                                          "simbolo": "cauda_mem",
-                                                                                                          "producao": [
-                                                                                                            "ε"
-                                                                                                          ]
-                                                                                                        }
-                                                                                                      ]
-                                                                                                    },
-                                                                                                    {
-                                                                                                      "tipo_no": "terminal",
-                                                                                                      "simbolo": "RPAREN",
-                                                                                                      "token": {
-                                                                                                        "tipo": "RPAREN",
-                                                                                                        "valor": ")",
-                                                                                                        "linha": 12
-                                                                                                      }
-                                                                                                    }
-                                                                                                  ]
-                                                                                                },
-                                                                                                {
-                                                                                                  "tipo_no": "nao_terminal",
-                                                                                                  "simbolo": "resto_corpo",
-                                                                                                  "producao": [
-                                                                                                    "operando",
-                                                                                                    "operador_arit"
-                                                                                                  ],
-                                                                                                  "filhos": [
-                                                                                                    {
-                                                                                                      "tipo_no": "nao_terminal",
-                                                                                                      "simbolo": "operando",
-                                                                                                      "producao": [
-                                                                                                        "REAL"
-                                                                                                      ],
-                                                                                                      "filhos": [
-                                                                                                        {
-                                                                                                          "tipo_no": "terminal",
-                                                                                                          "simbolo": "REAL",
-                                                                                                          "token": {
-                                                                                                            "tipo": "REAL",
-                                                                                                            "valor": "2.0",
-                                                                                                            "linha": 12
-                                                                                                          }
-                                                                                                        }
-                                                                                                      ]
-                                                                                                    },
-                                                                                                    {
-                                                                                                      "tipo_no": "nao_terminal",
-                                                                                                      "simbolo": "operador_arit",
-                                                                                                      "producao": [
-                                                                                                        "OP_MUL"
-                                                                                                      ],
-                                                                                                      "filhos": [
-                                                                                                        {
-                                                                                                          "tipo_no": "terminal",
-                                                                                                          "simbolo": "OP_MUL",
-                                                                                                          "token": {
-                                                                                                            "tipo": "OP_MUL",
-                                                                                                            "valor": "*",
-                                                                                                            "linha": 12
-                                                                                                          }
-                                                                                                        }
-                                                                                                      ]
-                                                                                                    }
-                                                                                                  ]
-                                                                                                }
-                                                                                              ]
-                                                                                            },
-                                                                                            {
-                                                                                              "tipo_no": "terminal",
-                                                                                              "simbolo": "RPAREN",
-                                                                                              "token": {
-                                                                                                "tipo": "RPAREN",
-                                                                                                "valor": ")",
-                                                                                                "linha": 12
-                                                                                              }
-                                                                                            },
-                                                                                            {
-                                                                                              "tipo_no": "nao_terminal",
-                                                                                              "simbolo": "linhas",
-                                                                                              "producao": [
-                                                                                                "LPAREN",
-                                                                                                "linhas_rest"
-                                                                                              ],
-                                                                                              "filhos": [
-                                                                                                {
-                                                                                                  "tipo_no": "terminal",
-                                                                                                  "simbolo": "LPAREN",
-                                                                                                  "token": {
-                                                                                                    "tipo": "LPAREN",
-                                                                                                    "valor": "(",
-                                                                                                    "linha": 13
-                                                                                                  }
-                                                                                                },
-                                                                                                {
-                                                                                                  "tipo_no": "nao_terminal",
-                                                                                                  "simbolo": "linhas_rest",
-                                                                                                  "producao": [
-                                                                                                    "corpo",
-                                                                                                    "RPAREN",
-                                                                                                    "linhas"
-                                                                                                  ],
-                                                                                                  "filhos": [
-                                                                                                    {
-                                                                                                      "tipo_no": "nao_terminal",
-                                                                                                      "simbolo": "corpo",
-                                                                                                      "producao": [
-                                                                                                        "KW_IF",
-                                                                                                        "condicao",
-                                                                                                        "linha",
-                                                                                                        "linha"
-                                                                                                      ],
-                                                                                                      "filhos": [
-                                                                                                        {
-                                                                                                          "tipo_no": "terminal",
-                                                                                                          "simbolo": "KW_IF",
-                                                                                                          "token": {
-                                                                                                            "tipo": "KW_IF",
-                                                                                                            "valor": "IF",
-                                                                                                            "linha": 13
-                                                                                                          }
-                                                                                                        },
-                                                                                                        {
-                                                                                                          "tipo_no": "nao_terminal",
-                                                                                                          "simbolo": "condicao",
-                                                                                                          "producao": [
-                                                                                                            "LPAREN",
-                                                                                                            "operando",
-                                                                                                            "operando",
-                                                                                                            "op_rel",
-                                                                                                            "RPAREN"
-                                                                                                          ],
-                                                                                                          "filhos": [
-                                                                                                            {
-                                                                                                              "tipo_no": "terminal",
-                                                                                                              "simbolo": "LPAREN",
-                                                                                                              "token": {
-                                                                                                                "tipo": "LPAREN",
-                                                                                                                "valor": "(",
-                                                                                                                "linha": 13
-                                                                                                              }
-                                                                                                            },
-                                                                                                            {
-                                                                                                              "tipo_no": "nao_terminal",
-                                                                                                              "simbolo": "operando",
-                                                                                                              "producao": [
-                                                                                                                "INT"
-                                                                                                              ],
-                                                                                                              "filhos": [
-                                                                                                                {
-                                                                                                                  "tipo_no": "terminal",
-                                                                                                                  "simbolo": "INT",
-                                                                                                                  "token": {
-                                                                                                                    "tipo": "INT",
-                                                                                                                    "valor": "10",
-                                                                                                                    "linha": 13
-                                                                                                                  }
-                                                                                                                }
-                                                                                                              ]
-                                                                                                            },
-                                                                                                            {
-                                                                                                              "tipo_no": "nao_terminal",
-                                                                                                              "simbolo": "operando",
-                                                                                                              "producao": [
-                                                                                                                "INT"
-                                                                                                              ],
-                                                                                                              "filhos": [
-                                                                                                                {
-                                                                                                                  "tipo_no": "terminal",
-                                                                                                                  "simbolo": "INT",
-                                                                                                                  "token": {
-                                                                                                                    "tipo": "INT",
-                                                                                                                    "valor": "5",
-                                                                                                                    "linha": 13
-                                                                                                                  }
-                                                                                                                }
-                                                                                                              ]
-                                                                                                            },
-                                                                                                            {
-                                                                                                              "tipo_no": "nao_terminal",
-                                                                                                              "simbolo": "op_rel",
-                                                                                                              "producao": [
-                                                                                                                "OP_GT"
-                                                                                                              ],
-                                                                                                              "filhos": [
-                                                                                                                {
-                                                                                                                  "tipo_no": "terminal",
-                                                                                                                  "simbolo": "OP_GT",
-                                                                                                                  "token": {
-                                                                                                                    "tipo": "OP_GT",
-                                                                                                                    "valor": ">",
-                                                                                                                    "linha": 13
-                                                                                                                  }
-                                                                                                                }
-                                                                                                              ]
-                                                                                                            },
-                                                                                                            {
-                                                                                                              "tipo_no": "terminal",
-                                                                                                              "simbolo": "RPAREN",
-                                                                                                              "token": {
-                                                                                                                "tipo": "RPAREN",
-                                                                                                                "valor": ")",
-                                                                                                                "linha": 13
-                                                                                                              }
-                                                                                                            }
-                                                                                                          ]
-                                                                                                        },
-                                                                                                        {
-                                                                                                          "tipo_no": "nao_terminal",
-                                                                                                          "simbolo": "linha",
-                                                                                                          "producao": [
-                                                                                                            "LPAREN",
-                                                                                                            "corpo",
-                                                                                                            "RPAREN"
-                                                                                                          ],
-                                                                                                          "filhos": [
-                                                                                                            {
-                                                                                                              "tipo_no": "terminal",
-                                                                                                              "simbolo": "LPAREN",
-                                                                                                              "token": {
-                                                                                                                "tipo": "LPAREN",
-                                                                                                                "valor": "(",
-                                                                                                                "linha": 13
-                                                                                                              }
-                                                                                                            },
-                                                                                                            {
-                                                                                                              "tipo_no": "nao_terminal",
-                                                                                                              "simbolo": "corpo",
-                                                                                                              "producao": [
-                                                                                                                "REAL",
-                                                                                                                "resto_corpo"
-                                                                                                              ],
-                                                                                                              "filhos": [
-                                                                                                                {
-                                                                                                                  "tipo_no": "terminal",
-                                                                                                                  "simbolo": "REAL",
-                                                                                                                  "token": {
-                                                                                                                    "tipo": "REAL",
-                                                                                                                    "valor": "1.0",
-                                                                                                                    "linha": 13
-                                                                                                                  }
-                                                                                                                },
-                                                                                                                {
-                                                                                                                  "tipo_no": "nao_terminal",
-                                                                                                                  "simbolo": "resto_corpo",
-                                                                                                                  "producao": [
-                                                                                                                    "operando",
-                                                                                                                    "operador_arit"
-                                                                                                                  ],
-                                                                                                                  "filhos": [
-                                                                                                                    {
-                                                                                                                      "tipo_no": "nao_terminal",
-                                                                                                                      "simbolo": "operando",
-                                                                                                                      "producao": [
-                                                                                                                        "REAL"
-                                                                                                                      ],
-                                                                                                                      "filhos": [
-                                                                                                                        {
-                                                                                                                          "tipo_no": "terminal",
-                                                                                                                          "simbolo": "REAL",
-                                                                                                                          "token": {
-                                                                                                                            "tipo": "REAL",
-                                                                                                                            "valor": "2.0",
-                                                                                                                            "linha": 13
-                                                                                                                          }
-                                                                                                                        }
-                                                                                                                      ]
-                                                                                                                    },
-                                                                                                                    {
-                                                                                                                      "tipo_no": "nao_terminal",
-                                                                                                                      "simbolo": "operador_arit",
-                                                                                                                      "producao": [
-                                                                                                                        "OP_SUM"
-                                                                                                                      ],
-                                                                                                                      "filhos": [
-                                                                                                                        {
-                                                                                                                          "tipo_no": "terminal",
-                                                                                                                          "simbolo": "OP_SUM",
-                                                                                                                          "token": {
-                                                                                                                            "tipo": "OP_SUM",
-                                                                                                                            "valor": "+",
-                                                                                                                            "linha": 13
-                                                                                                                          }
-                                                                                                                        }
-                                                                                                                      ]
-                                                                                                                    }
-                                                                                                                  ]
-                                                                                                                }
-                                                                                                              ]
-                                                                                                            },
-                                                                                                            {
-                                                                                                              "tipo_no": "terminal",
-                                                                                                              "simbolo": "RPAREN",
-                                                                                                              "token": {
-                                                                                                                "tipo": "RPAREN",
-                                                                                                                "valor": ")",
-                                                                                                                "linha": 13
-                                                                                                              }
-                                                                                                            }
-                                                                                                          ]
-                                                                                                        },
-                                                                                                        {
-                                                                                                          "tipo_no": "nao_terminal",
-                                                                                                          "simbolo": "linha",
-                                                                                                          "producao": [
-                                                                                                            "LPAREN",
-                                                                                                            "corpo",
-                                                                                                            "RPAREN"
-                                                                                                          ],
-                                                                                                          "filhos": [
-                                                                                                            {
-                                                                                                              "tipo_no": "terminal",
-                                                                                                              "simbolo": "LPAREN",
-                                                                                                              "token": {
-                                                                                                                "tipo": "LPAREN",
-                                                                                                                "valor": "(",
-                                                                                                                "linha": 13
-                                                                                                              }
-                                                                                                            },
-                                                                                                            {
-                                                                                                              "tipo_no": "nao_terminal",
-                                                                                                              "simbolo": "corpo",
-                                                                                                              "producao": [
-                                                                                                                "REAL",
-                                                                                                                "resto_corpo"
-                                                                                                              ],
-                                                                                                              "filhos": [
-                                                                                                                {
-                                                                                                                  "tipo_no": "terminal",
-                                                                                                                  "simbolo": "REAL",
-                                                                                                                  "token": {
-                                                                                                                    "tipo": "REAL",
-                                                                                                                    "valor": "3.0",
-                                                                                                                    "linha": 13
-                                                                                                                  }
-                                                                                                                },
-                                                                                                                {
-                                                                                                                  "tipo_no": "nao_terminal",
-                                                                                                                  "simbolo": "resto_corpo",
-                                                                                                                  "producao": [
-                                                                                                                    "operando",
-                                                                                                                    "operador_arit"
-                                                                                                                  ],
-                                                                                                                  "filhos": [
-                                                                                                                    {
-                                                                                                                      "tipo_no": "nao_terminal",
-                                                                                                                      "simbolo": "operando",
-                                                                                                                      "producao": [
-                                                                                                                        "REAL"
-                                                                                                                      ],
-                                                                                                                      "filhos": [
-                                                                                                                        {
-                                                                                                                          "tipo_no": "terminal",
-                                                                                                                          "simbolo": "REAL",
-                                                                                                                          "token": {
-                                                                                                                            "tipo": "REAL",
-                                                                                                                            "valor": "4.0",
-                                                                                                                            "linha": 13
-                                                                                                                          }
-                                                                                                                        }
-                                                                                                                      ]
-                                                                                                                    },
-                                                                                                                    {
-                                                                                                                      "tipo_no": "nao_terminal",
-                                                                                                                      "simbolo": "operador_arit",
-                                                                                                                      "producao": [
-                                                                                                                        "OP_SUB"
-                                                                                                                      ],
-                                                                                                                      "filhos": [
-                                                                                                                        {
-                                                                                                                          "tipo_no": "terminal",
-                                                                                                                          "simbolo": "OP_SUB",
-                                                                                                                          "token": {
-                                                                                                                            "tipo": "OP_SUB",
-                                                                                                                            "valor": "-",
-                                                                                                                            "linha": 13
-                                                                                                                          }
-                                                                                                                        }
-                                                                                                                      ]
-                                                                                                                    }
-                                                                                                                  ]
-                                                                                                                }
-                                                                                                              ]
-                                                                                                            },
-                                                                                                            {
-                                                                                                              "tipo_no": "terminal",
-                                                                                                              "simbolo": "RPAREN",
-                                                                                                              "token": {
-                                                                                                                "tipo": "RPAREN",
-                                                                                                                "valor": ")",
-                                                                                                                "linha": 13
-                                                                                                              }
-                                                                                                            }
-                                                                                                          ]
-                                                                                                        }
-                                                                                                      ]
-                                                                                                    },
-                                                                                                    {
-                                                                                                      "tipo_no": "terminal",
-                                                                                                      "simbolo": "RPAREN",
-                                                                                                      "token": {
-                                                                                                        "tipo": "RPAREN",
-                                                                                                        "valor": ")",
-                                                                                                        "linha": 13
-                                                                                                      }
-                                                                                                    },
-                                                                                                    {
-                                                                                                      "tipo_no": "nao_terminal",
-                                                                                                      "simbolo": "linhas",
-                                                                                                      "producao": [
-                                                                                                        "LPAREN",
-                                                                                                        "linhas_rest"
-                                                                                                      ],
-                                                                                                      "filhos": [
-                                                                                                        {
-                                                                                                          "tipo_no": "terminal",
-                                                                                                          "simbolo": "LPAREN",
-                                                                                                          "token": {
-                                                                                                            "tipo": "LPAREN",
-                                                                                                            "valor": "(",
-                                                                                                            "linha": 14
-                                                                                                          }
-                                                                                                        },
-                                                                                                        {
-                                                                                                          "tipo_no": "nao_terminal",
-                                                                                                          "simbolo": "linhas_rest",
-                                                                                                          "producao": [
-                                                                                                            "corpo",
-                                                                                                            "RPAREN",
-                                                                                                            "linhas"
-                                                                                                          ],
-                                                                                                          "filhos": [
-                                                                                                            {
-                                                                                                              "tipo_no": "nao_terminal",
-                                                                                                              "simbolo": "corpo",
-                                                                                                              "producao": [
-                                                                                                                "KW_WHILE",
-                                                                                                                "condicao",
-                                                                                                                "linha"
-                                                                                                              ],
-                                                                                                              "filhos": [
-                                                                                                                {
-                                                                                                                  "tipo_no": "terminal",
-                                                                                                                  "simbolo": "KW_WHILE",
-                                                                                                                  "token": {
-                                                                                                                    "tipo": "KW_WHILE",
-                                                                                                                    "valor": "WHILE",
-                                                                                                                    "linha": 14
-                                                                                                                  }
-                                                                                                                },
-                                                                                                                {
-                                                                                                                  "tipo_no": "nao_terminal",
-                                                                                                                  "simbolo": "condicao",
-                                                                                                                  "producao": [
-                                                                                                                    "LPAREN",
-                                                                                                                    "operando",
-                                                                                                                    "operando",
-                                                                                                                    "op_rel",
-                                                                                                                    "RPAREN"
-                                                                                                                  ],
-                                                                                                                  "filhos": [
-                                                                                                                    {
-                                                                                                                      "tipo_no": "terminal",
-                                                                                                                      "simbolo": "LPAREN",
-                                                                                                                      "token": {
-                                                                                                                        "tipo": "LPAREN",
-                                                                                                                        "valor": "(",
-                                                                                                                        "linha": 14
-                                                                                                                      }
-                                                                                                                    },
-                                                                                                                    {
-                                                                                                                      "tipo_no": "nao_terminal",
-                                                                                                                      "simbolo": "operando",
-                                                                                                                      "producao": [
-                                                                                                                        "MEM_ID"
-                                                                                                                      ],
-                                                                                                                      "filhos": [
-                                                                                                                        {
-                                                                                                                          "tipo_no": "terminal",
-                                                                                                                          "simbolo": "MEM_ID",
-                                                                                                                          "token": {
-                                                                                                                            "tipo": "MEM_ID",
-                                                                                                                            "valor": "X",
-                                                                                                                            "linha": 14
-                                                                                                                          }
-                                                                                                                        }
-                                                                                                                      ]
-                                                                                                                    },
-                                                                                                                    {
-                                                                                                                      "tipo_no": "nao_terminal",
-                                                                                                                      "simbolo": "operando",
-                                                                                                                      "producao": [
-                                                                                                                        "INT"
-                                                                                                                      ],
-                                                                                                                      "filhos": [
-                                                                                                                        {
-                                                                                                                          "tipo_no": "terminal",
-                                                                                                                          "simbolo": "INT",
-                                                                                                                          "token": {
-                                                                                                                            "tipo": "INT",
-                                                                                                                            "valor": "5",
-                                                                                                                            "linha": 14
-                                                                                                                          }
-                                                                                                                        }
-                                                                                                                      ]
-                                                                                                                    },
-                                                                                                                    {
-                                                                                                                      "tipo_no": "nao_terminal",
-                                                                                                                      "simbolo": "op_rel",
-                                                                                                                      "producao": [
-                                                                                                                        "OP_LT"
-                                                                                                                      ],
-                                                                                                                      "filhos": [
-                                                                                                                        {
-                                                                                                                          "tipo_no": "terminal",
-                                                                                                                          "simbolo": "OP_LT",
-                                                                                                                          "token": {
-                                                                                                                            "tipo": "OP_LT",
-                                                                                                                            "valor": "<",
-                                                                                                                            "linha": 14
-                                                                                                                          }
-                                                                                                                        }
-                                                                                                                      ]
-                                                                                                                    },
-                                                                                                                    {
-                                                                                                                      "tipo_no": "terminal",
-                                                                                                                      "simbolo": "RPAREN",
-                                                                                                                      "token": {
-                                                                                                                        "tipo": "RPAREN",
-                                                                                                                        "valor": ")",
-                                                                                                                        "linha": 14
-                                                                                                                      }
-                                                                                                                    }
-                                                                                                                  ]
-                                                                                                                },
-                                                                                                                {
-                                                                                                                  "tipo_no": "nao_terminal",
-                                                                                                                  "simbolo": "linha",
-                                                                                                                  "producao": [
-                                                                                                                    "LPAREN",
-                                                                                                                    "corpo",
-                                                                                                                    "RPAREN"
-                                                                                                                  ],
-                                                                                                                  "filhos": [
-                                                                                                                    {
-                                                                                                                      "tipo_no": "terminal",
-                                                                                                                      "simbolo": "LPAREN",
-                                                                                                                      "token": {
-                                                                                                                        "tipo": "LPAREN",
-                                                                                                                        "valor": "(",
-                                                                                                                        "linha": 14
-                                                                                                                      }
-                                                                                                                    },
-                                                                                                                    {
-                                                                                                                      "tipo_no": "nao_terminal",
-                                                                                                                      "simbolo": "corpo",
-                                                                                                                      "producao": [
-                                                                                                                        "linha",
-                                                                                                                        "resto_corpo"
-                                                                                                                      ],
-                                                                                                                      "filhos": [
-                                                                                                                        {
-                                                                                                                          "tipo_no": "nao_terminal",
-                                                                                                                          "simbolo": "linha",
-                                                                                                                          "producao": [
-                                                                                                                            "LPAREN",
-                                                                                                                            "corpo",
-                                                                                                                            "RPAREN"
-                                                                                                                          ],
-                                                                                                                          "filhos": [
-                                                                                                                            {
-                                                                                                                              "tipo_no": "terminal",
-                                                                                                                              "simbolo": "LPAREN",
-                                                                                                                              "token": {
-                                                                                                                                "tipo": "LPAREN",
-                                                                                                                                "valor": "(",
-                                                                                                                                "linha": 14
-                                                                                                                              }
-                                                                                                                            },
-                                                                                                                            {
-                                                                                                                              "tipo_no": "nao_terminal",
-                                                                                                                              "simbolo": "corpo",
-                                                                                                                              "producao": [
-                                                                                                                                "MEM_ID",
-                                                                                                                                "cauda_mem"
-                                                                                                                              ],
-                                                                                                                              "filhos": [
-                                                                                                                                {
-                                                                                                                                  "tipo_no": "terminal",
-                                                                                                                                  "simbolo": "MEM_ID",
-                                                                                                                                  "token": {
-                                                                                                                                    "tipo": "MEM_ID",
-                                                                                                                                    "valor": "X",
-                                                                                                                                    "linha": 14
-                                                                                                                                  }
-                                                                                                                                },
-                                                                                                                                {
-                                                                                                                                  "tipo_no": "nao_terminal",
-                                                                                                                                  "simbolo": "cauda_mem",
-                                                                                                                                  "producao": [
-                                                                                                                                    "ε"
-                                                                                                                                  ]
-                                                                                                                                }
-                                                                                                                              ]
-                                                                                                                            },
-                                                                                                                            {
-                                                                                                                              "tipo_no": "terminal",
-                                                                                                                              "simbolo": "RPAREN",
-                                                                                                                              "token": {
-                                                                                                                                "tipo": "RPAREN",
-                                                                                                                                "valor": ")",
-                                                                                                                                "linha": 14
-                                                                                                                              }
-                                                                                                                            }
-                                                                                                                          ]
-                                                                                                                        },
-                                                                                                                        {
-                                                                                                                          "tipo_no": "nao_terminal",
-                                                                                                                          "simbolo": "resto_corpo",
-                                                                                                                          "producao": [
-                                                                                                                            "operando",
-                                                                                                                            "operador_arit"
-                                                                                                                          ],
-                                                                                                                          "filhos": [
-                                                                                                                            {
-                                                                                                                              "tipo_no": "nao_terminal",
-                                                                                                                              "simbolo": "operando",
-                                                                                                                              "producao": [
-                                                                                                                                "INT"
-                                                                                                                              ],
-                                                                                                                              "filhos": [
-                                                                                                                                {
-                                                                                                                                  "tipo_no": "terminal",
-                                                                                                                                  "simbolo": "INT",
-                                                                                                                                  "token": {
-                                                                                                                                    "tipo": "INT",
-                                                                                                                                    "valor": "1",
-                                                                                                                                    "linha": 14
-                                                                                                                                  }
-                                                                                                                                }
-                                                                                                                              ]
-                                                                                                                            },
-                                                                                                                            {
-                                                                                                                              "tipo_no": "nao_terminal",
-                                                                                                                              "simbolo": "operador_arit",
-                                                                                                                              "producao": [
-                                                                                                                                "OP_SUM"
-                                                                                                                              ],
-                                                                                                                              "filhos": [
-                                                                                                                                {
-                                                                                                                                  "tipo_no": "terminal",
-                                                                                                                                  "simbolo": "OP_SUM",
-                                                                                                                                  "token": {
-                                                                                                                                    "tipo": "OP_SUM",
-                                                                                                                                    "valor": "+",
-                                                                                                                                    "linha": 14
-                                                                                                                                  }
-                                                                                                                                }
-                                                                                                                              ]
-                                                                                                                            }
-                                                                                                                          ]
-                                                                                                                        }
-                                                                                                                      ]
-                                                                                                                    },
-                                                                                                                    {
-                                                                                                                      "tipo_no": "terminal",
-                                                                                                                      "simbolo": "RPAREN",
-                                                                                                                      "token": {
-                                                                                                                        "tipo": "RPAREN",
-                                                                                                                        "valor": ")",
-                                                                                                                        "linha": 14
-                                                                                                                      }
-                                                                                                                    }
-                                                                                                                  ]
-                                                                                                                }
-                                                                                                              ]
-                                                                                                            },
-                                                                                                            {
-                                                                                                              "tipo_no": "terminal",
-                                                                                                              "simbolo": "RPAREN",
-                                                                                                              "token": {
-                                                                                                                "tipo": "RPAREN",
-                                                                                                                "valor": ")",
-                                                                                                                "linha": 14
-                                                                                                              }
-                                                                                                            },
-                                                                                                            {
-                                                                                                              "tipo_no": "nao_terminal",
-                                                                                                              "simbolo": "linhas",
-                                                                                                              "producao": [
-                                                                                                                "LPAREN",
-                                                                                                                "linhas_rest"
-                                                                                                              ],
-                                                                                                              "filhos": [
-                                                                                                                {
-                                                                                                                  "tipo_no": "terminal",
-                                                                                                                  "simbolo": "LPAREN",
-                                                                                                                  "token": {
-                                                                                                                    "tipo": "LPAREN",
-                                                                                                                    "valor": "(",
-                                                                                                                    "linha": 15
-                                                                                                                  }
-                                                                                                                },
-                                                                                                                {
-                                                                                                                  "tipo_no": "nao_terminal",
-                                                                                                                  "simbolo": "linhas_rest",
-                                                                                                                  "producao": [
-                                                                                                                    "corpo",
-                                                                                                                    "RPAREN",
-                                                                                                                    "linhas"
-                                                                                                                  ],
-                                                                                                                  "filhos": [
-                                                                                                                    {
-                                                                                                                      "tipo_no": "nao_terminal",
-                                                                                                                      "simbolo": "corpo",
-                                                                                                                      "producao": [
-                                                                                                                        "KW_FOR",
-                                                                                                                        "INT",
-                                                                                                                        "INT",
-                                                                                                                        "MEM_ID",
-                                                                                                                        "linha"
-                                                                                                                      ],
-                                                                                                                      "filhos": [
-                                                                                                                        {
-                                                                                                                          "tipo_no": "terminal",
-                                                                                                                          "simbolo": "KW_FOR",
-                                                                                                                          "token": {
-                                                                                                                            "tipo": "KW_FOR",
-                                                                                                                            "valor": "FOR",
-                                                                                                                            "linha": 15
-                                                                                                                          }
-                                                                                                                        },
-                                                                                                                        {
-                                                                                                                          "tipo_no": "terminal",
-                                                                                                                          "simbolo": "INT",
-                                                                                                                          "token": {
-                                                                                                                            "tipo": "INT",
-                                                                                                                            "valor": "1",
-                                                                                                                            "linha": 15
-                                                                                                                          }
-                                                                                                                        },
-                                                                                                                        {
-                                                                                                                          "tipo_no": "terminal",
-                                                                                                                          "simbolo": "INT",
-                                                                                                                          "token": {
-                                                                                                                            "tipo": "INT",
-                                                                                                                            "valor": "5",
-                                                                                                                            "linha": 15
-                                                                                                                          }
-                                                                                                                        },
-                                                                                                                        {
-                                                                                                                          "tipo_no": "terminal",
-                                                                                                                          "simbolo": "MEM_ID",
-                                                                                                                          "token": {
-                                                                                                                            "tipo": "MEM_ID",
-                                                                                                                            "valor": "I",
-                                                                                                                            "linha": 15
-                                                                                                                          }
-                                                                                                                        },
-                                                                                                                        {
-                                                                                                                          "tipo_no": "nao_terminal",
-                                                                                                                          "simbolo": "linha",
-                                                                                                                          "producao": [
-                                                                                                                            "LPAREN",
-                                                                                                                            "corpo",
-                                                                                                                            "RPAREN"
-                                                                                                                          ],
-                                                                                                                          "filhos": [
-                                                                                                                            {
-                                                                                                                              "tipo_no": "terminal",
-                                                                                                                              "simbolo": "LPAREN",
-                                                                                                                              "token": {
-                                                                                                                                "tipo": "LPAREN",
-                                                                                                                                "valor": "(",
-                                                                                                                                "linha": 15
-                                                                                                                              }
-                                                                                                                            },
-                                                                                                                            {
-                                                                                                                              "tipo_no": "nao_terminal",
-                                                                                                                              "simbolo": "corpo",
-                                                                                                                              "producao": [
-                                                                                                                                "linha",
-                                                                                                                                "resto_corpo"
-                                                                                                                              ],
-                                                                                                                              "filhos": [
-                                                                                                                                {
-                                                                                                                                  "tipo_no": "nao_terminal",
-                                                                                                                                  "simbolo": "linha",
-                                                                                                                                  "producao": [
-                                                                                                                                    "LPAREN",
-                                                                                                                                    "corpo",
-                                                                                                                                    "RPAREN"
-                                                                                                                                  ],
-                                                                                                                                  "filhos": [
-                                                                                                                                    {
-                                                                                                                                      "tipo_no": "terminal",
-                                                                                                                                      "simbolo": "LPAREN",
-                                                                                                                                      "token": {
-                                                                                                                                        "tipo": "LPAREN",
-                                                                                                                                        "valor": "(",
-                                                                                                                                        "linha": 15
-                                                                                                                                      }
-                                                                                                                                    },
-                                                                                                                                    {
-                                                                                                                                      "tipo_no": "nao_terminal",
-                                                                                                                                      "simbolo": "corpo",
-                                                                                                                                      "producao": [
-                                                                                                                                        "MEM_ID",
-                                                                                                                                        "cauda_mem"
-                                                                                                                                      ],
-                                                                                                                                      "filhos": [
-                                                                                                                                        {
-                                                                                                                                          "tipo_no": "terminal",
-                                                                                                                                          "simbolo": "MEM_ID",
-                                                                                                                                          "token": {
-                                                                                                                                            "tipo": "MEM_ID",
-                                                                                                                                            "valor": "I",
-                                                                                                                                            "linha": 15
-                                                                                                                                          }
-                                                                                                                                        },
-                                                                                                                                        {
-                                                                                                                                          "tipo_no": "nao_terminal",
-                                                                                                                                          "simbolo": "cauda_mem",
-                                                                                                                                          "producao": [
-                                                                                                                                            "ε"
-                                                                                                                                          ]
-                                                                                                                                        }
-                                                                                                                                      ]
-                                                                                                                                    },
-                                                                                                                                    {
-                                                                                                                                      "tipo_no": "terminal",
-                                                                                                                                      "simbolo": "RPAREN",
-                                                                                                                                      "token": {
-                                                                                                                                        "tipo": "RPAREN",
-                                                                                                                                        "valor": ")",
-                                                                                                                                        "linha": 15
-                                                                                                                                      }
-                                                                                                                                    }
-                                                                                                                                  ]
-                                                                                                                                },
-                                                                                                                                {
-                                                                                                                                  "tipo_no": "nao_terminal",
-                                                                                                                                  "simbolo": "resto_corpo",
-                                                                                                                                  "producao": [
-                                                                                                                                    "operando",
-                                                                                                                                    "operador_arit"
-                                                                                                                                  ],
-                                                                                                                                  "filhos": [
-                                                                                                                                    {
-                                                                                                                                      "tipo_no": "nao_terminal",
-                                                                                                                                      "simbolo": "operando",
-                                                                                                                                      "producao": [
-                                                                                                                                        "INT"
-                                                                                                                                      ],
-                                                                                                                                      "filhos": [
-                                                                                                                                        {
-                                                                                                                                          "tipo_no": "terminal",
-                                                                                                                                          "simbolo": "INT",
-                                                                                                                                          "token": {
-                                                                                                                                            "tipo": "INT",
-                                                                                                                                            "valor": "2",
-                                                                                                                                            "linha": 15
-                                                                                                                                          }
-                                                                                                                                        }
-                                                                                                                                      ]
-                                                                                                                                    },
-                                                                                                                                    {
-                                                                                                                                      "tipo_no": "nao_terminal",
-                                                                                                                                      "simbolo": "operador_arit",
-                                                                                                                                      "producao": [
-                                                                                                                                        "OP_MUL"
-                                                                                                                                      ],
-                                                                                                                                      "filhos": [
-                                                                                                                                        {
-                                                                                                                                          "tipo_no": "terminal",
-                                                                                                                                          "simbolo": "OP_MUL",
-                                                                                                                                          "token": {
-                                                                                                                                            "tipo": "OP_MUL",
-                                                                                                                                            "valor": "*",
-                                                                                                                                            "linha": 15
-                                                                                                                                          }
-                                                                                                                                        }
-                                                                                                                                      ]
-                                                                                                                                    }
-                                                                                                                                  ]
-                                                                                                                                }
-                                                                                                                              ]
-                                                                                                                            },
-                                                                                                                            {
-                                                                                                                              "tipo_no": "terminal",
-                                                                                                                              "simbolo": "RPAREN",
-                                                                                                                              "token": {
-                                                                                                                                "tipo": "RPAREN",
-                                                                                                                                "valor": ")",
-                                                                                                                                "linha": 15
-                                                                                                                              }
-                                                                                                                            }
-                                                                                                                          ]
-                                                                                                                        }
-                                                                                                                      ]
-                                                                                                                    },
-                                                                                                                    {
-                                                                                                                      "tipo_no": "terminal",
-                                                                                                                      "simbolo": "RPAREN",
-                                                                                                                      "token": {
-                                                                                                                        "tipo": "RPAREN",
-                                                                                                                        "valor": ")",
-                                                                                                                        "linha": 15
-                                                                                                                      }
-                                                                                                                    },
-                                                                                                                    {
-                                                                                                                      "tipo_no": "nao_terminal",
-                                                                                                                      "simbolo": "linhas",
-                                                                                                                      "producao": [
-                                                                                                                        "LPAREN",
-                                                                                                                        "linhas_rest"
-                                                                                                                      ],
-                                                                                                                      "filhos": [
-                                                                                                                        {
-                                                                                                                          "tipo_no": "terminal",
-                                                                                                                          "simbolo": "LPAREN",
-                                                                                                                          "token": {
-                                                                                                                            "tipo": "LPAREN",
-                                                                                                                            "valor": "(",
-                                                                                                                            "linha": 16
-                                                                                                                          }
-                                                                                                                        },
-                                                                                                                        {
-                                                                                                                          "tipo_no": "nao_terminal",
-                                                                                                                          "simbolo": "linhas_rest",
-                                                                                                                          "producao": [
-                                                                                                                            "KW_END",
-                                                                                                                            "RPAREN"
-                                                                                                                          ],
-                                                                                                                          "filhos": [
-                                                                                                                            {
-                                                                                                                              "tipo_no": "terminal",
-                                                                                                                              "simbolo": "KW_END",
-                                                                                                                              "token": {
-                                                                                                                                "tipo": "KW_END",
-                                                                                                                                "valor": "END",
-                                                                                                                                "linha": 16
-                                                                                                                              }
-                                                                                                                            },
-                                                                                                                            {
-                                                                                                                              "tipo_no": "terminal",
-                                                                                                                              "simbolo": "RPAREN",
-                                                                                                                              "token": {
-                                                                                                                                "tipo": "RPAREN",
-                                                                                                                                "valor": ")",
-                                                                                                                                "linha": 16
-                                                                                                                              }
-                                                                                                                            }
-                                                                                                                          ]
-                                                                                                                        }
-                                                                                                                      ]
-                                                                                                                    }
-                                                                                                                  ]
-                                                                                                                }
-                                                                                                              ]
-                                                                                                            }
-                                                                                                          ]
-                                                                                                        }
-                                                                                                      ]
-                                                                                                    }
-                                                                                                  ]
-                                                                                                }
-                                                                                              ]
-                                                                                            }
-                                                                                          ]
-                                                                                        }
-                                                                                      ]
-                                                                                    }
-                                                                                  ]
-                                                                                }
-                                                                              ]
-                                                                            }
-                                                                          ]
-                                                                        }
-                                                                      ]
-                                                                    }
-                                                                  ]
-                                                                }
-                                                              ]
-                                                            }
-                                                          ]
-                                                        }
-                                                      ]
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
                     }
                   ]
                 }
