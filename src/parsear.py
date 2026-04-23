@@ -1,5 +1,6 @@
 # João Henrique Tomaz Dutra - Aluno 2
 from construirGramatica import construirGramatica, eh_terminal
+from lerTokens import lerTokens
 import json
 import os
 
@@ -7,11 +8,11 @@ EPSILON = "ε"
 EOF = "$"
 
 class No:
-    def __init__(self, simbolo, tipo_no):
+    def __init__(self, simbolo,tipo_no):
         self.simbolo = simbolo # guarda o símbolo da gramática
         self.tipo_no = tipo_no  # "terminal" ou "nao_terminal"
         self.producao = None   # pega regra de produção da gramática 
-        self.token = None
+        self.token = None  # tipagem e o valor em si (5)
         self.filhos = []  # listas de nós filhos
 
     def to_dict(self):   # transforma toda ela em um dicionário JSON
@@ -89,10 +90,10 @@ def parsear(tokens, tabela, simbolo_inicial):
 
                 filhos = []
                 # Para cada símbolo da produção cria filhos
-                for s in prod:
-                    if s != EPSILON:
-                        tipo_no = "terminal" if validar_terminal(s, tabela) else "nao_terminal"
-                        novo = No(s, tipo_no)
+                for simbolo in prod:
+                    if simbolo != EPSILON:
+                        tipo_no = "terminal" if validar_terminal(simbolo, tabela) else "nao_terminal"
+                        novo = No(simbolo, tipo_no)
                         filhos.append(novo)
 
              
@@ -137,6 +138,7 @@ tokens = [
 
     {"tipo": "$", "valor": "$", "linha": 1},
 ]
+
 
 derivacao, arvore = parsear(tokens, info["tabela_ll1"], info["inicio"])
 
