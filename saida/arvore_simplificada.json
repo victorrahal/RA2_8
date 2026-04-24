@@ -1,37 +1,32 @@
 {
   "tipo": "sequencia",
   "atual": {
-    "tipo": "while",
-    "condicao": {
-      "tipo": "condicao",
-      "operador": "<",
-      "esquerdo": {
-        "tipo": "terminal",
-        "simbolo": "MEM_ID",
-        "valor": "X",
-        "linha": 2
-      },
-      "direito": {
-        "tipo": "terminal",
-        "simbolo": "INT",
-        "valor": "5",
-        "linha": 2
-      },
+    "tipo": "for",
+    "inicio": {
+      "tipo": "terminal",
+      "simbolo": "INT",
+      "valor": "0",
       "linha": 2
     },
+    "fim": {
+      "tipo": "terminal",
+      "simbolo": "INT",
+      "valor": "3",
+      "linha": 2
+    },
+    "variavel": "J",
     "corpo": {
       "tipo": "expressao_aritmetica",
-      "operador": "+",
+      "operador": "*",
       "operandos": [
         {
           "tipo": "leitura_memoria",
-          "nome": "X",
+          "nome": "J",
           "linha": 2
         },
         {
-          "tipo": "terminal",
-          "simbolo": "INT",
-          "valor": "1",
+          "tipo": "leitura_memoria",
+          "nome": "J",
           "linha": 2
         }
       ],

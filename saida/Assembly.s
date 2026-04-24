@@ -1,8 +1,9 @@
 .global _start
 .data
 .align 3
+val_0_0: .double 0.0
 val_1_0: .double 1.0
-val_5_0: .double 5.0
+val_3_0: .double 3.0
 resultado_0: .double 0.0
 resultado_1: .double 0.0
 resultado_2: .double 0.0
