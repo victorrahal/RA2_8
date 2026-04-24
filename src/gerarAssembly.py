@@ -1,19 +1,5 @@
 # Aluno 4: Lucas Balint Vilar
 
-#def ValidarNomeMemoria(token):
-#    try:
-#        if token.isalpha() and token.isupper() and token != 'RES':
-#            return True
-#    except ValueError:
-#        return 'Nome de memória invalido'
-
-
-#def ValidarNumero(token):
-#    try:
-#        float(token)  
-#        return True   # se True é numero
-#    except ValueError:
-#        return False  # se der erro, não é número
 import os
 
 raiz = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
