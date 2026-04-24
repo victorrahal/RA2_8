@@ -80,6 +80,19 @@ def simplificarArvore(no):
                     return simplificarArvore(filho)
                 
         case "corpo": 
+            # para IF
+            if len(no.filhos) == 4:
+                primeiroTermo = no.filhos[0]
+
+                if (primeiroTermo.tipo_no == "terminal" and primeiroTermo.simbolo == "KW_IF"):
+                    return {
+                        "tipo": "if",
+                        "condicao": simplificarArvore(no.filhos[1]),
+                        "entao": simplificarArvore(no.filhos[2]),
+                        "senao": simplificarArvore(no.filhos[3]),
+                        "linha": primeiroTermo.token.get("linha")
+                    }
+
             if len(no.filhos) == 2:
                 primeiroTermo = no.filhos[0]
                 segundoTermo = no.filhos[1]

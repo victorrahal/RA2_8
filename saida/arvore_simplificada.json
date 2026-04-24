@@ -1,70 +1,63 @@
 {
   "tipo": "sequencia",
   "atual": {
-    "tipo": "corpo",
-    "filhos": [
-      {
+    "tipo": "if",
+    "condicao": {
+      "tipo": "condicao",
+      "operador": ">",
+      "esquerdo": {
         "tipo": "terminal",
-        "simbolo": "KW_IF",
-        "valor": "IF",
+        "simbolo": "INT",
+        "valor": "10",
         "linha": 2
       },
-      {
-        "tipo": "condicao",
-        "operador": ">",
-        "esquerdo": {
+      "direito": {
+        "tipo": "terminal",
+        "simbolo": "INT",
+        "valor": "5",
+        "linha": 2
+      },
+      "linha": 2
+    },
+    "entao": {
+      "tipo": "expressao_aritmetica",
+      "operador": "+",
+      "operandos": [
+        {
           "tipo": "terminal",
-          "simbolo": "INT",
-          "valor": "10",
+          "simbolo": "REAL",
+          "valor": "1.0",
           "linha": 2
         },
-        "direito": {
+        {
           "tipo": "terminal",
-          "simbolo": "INT",
-          "valor": "5",
+          "simbolo": "REAL",
+          "valor": "2.0",
+          "linha": 2
+        }
+      ],
+      "linha": 2
+    },
+    "senao": {
+      "tipo": "expressao_aritmetica",
+      "operador": "-",
+      "operandos": [
+        {
+          "tipo": "terminal",
+          "simbolo": "REAL",
+          "valor": "3.0",
           "linha": 2
         },
-        "linha": 2
-      },
-      {
-        "tipo": "expressao_aritmetica",
-        "operador": "+",
-        "operandos": [
-          {
-            "tipo": "terminal",
-            "simbolo": "REAL",
-            "valor": "1.0",
-            "linha": 2
-          },
-          {
-            "tipo": "terminal",
-            "simbolo": "REAL",
-            "valor": "2.0",
-            "linha": 2
-          }
-        ],
-        "linha": 2
-      },
-      {
-        "tipo": "expressao_aritmetica",
-        "operador": "-",
-        "operandos": [
-          {
-            "tipo": "terminal",
-            "simbolo": "REAL",
-            "valor": "3.0",
-            "linha": 2
-          },
-          {
-            "tipo": "terminal",
-            "simbolo": "REAL",
-            "valor": "4.0",
-            "linha": 2
-          }
-        ],
-        "linha": 2
-      }
-    ]
+        {
+          "tipo": "terminal",
+          "simbolo": "REAL",
+          "valor": "4.0",
+          "linha": 2
+        }
+      ],
+      "linha": 2
+    },
+    "linha": 2
   },
   "proximo": {
     "tipo": "fim_programa",
