@@ -41,6 +41,7 @@ python src/main.py teste1.txt
 
 O programa procura o arquivo dentro da pasta `testes/`. Os arquivos de teste fornecidos são:
 - `teste1.txt`, `teste2.txt`, `teste3.txt` — programas válidos
+- `teste_doc.txt` — programa enxuto usado como exemplo na documentação (`docs/gramatica.md`)
 - `teste_erroLexico.txt`, `teste_erroSintatico.txt` — programas inválidos
 
 ### Saída
@@ -69,6 +70,7 @@ RA2_8/
 │   └── gerarAssembly.py      # Geração de Assembly ARMv7 (Aluno 4)
 ├── testes/                   # Arquivos de entrada (.txt)
 ├── tests/                    # Testes unitários (Python unittest)
+├── docs/                     # Documentação detalhada (gramática, FIRST/FOLLOW, tabela LL(1), árvore)
 ├── saida/                    # Arquivos gerados pela execução
 └── README.md
 ```
@@ -194,6 +196,11 @@ A função `construirGramatica()` calcula automaticamente os conjuntos **FIRST**
 ```bash
 python src/construirGramatica.py
 ```
+
+> **Documentação detalhada:** o arquivo [`docs/gramatica.md`](docs/gramatica.md) contém
+> a versão completa exigida pelo enunciado (item 11.4): regras de produção em EBNF,
+> conjuntos FIRST e FOLLOW de todos os não-terminais, tabela LL(1) completa e a
+> árvore sintática gerada para o arquivo `testes/teste_doc.txt`.
 
 ---
 
