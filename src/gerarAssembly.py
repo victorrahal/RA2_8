@@ -32,6 +32,21 @@ def valoresConstantes(no, valores):
                     if isinstance(i, dict):
                         valoresConstantes(i, valores)
 
+def valoresMemorias(no, memorias):
+    if isinstance(no, dict):
+        if no.get("tipo") == "leitura_memoria" or no.get("tipo") == "atribuicao_memoria":
+            memorias.add(no["nome"])
+        elif no.get("tipo") == "for":
+            memorias.add(no["variavel"])
+
+        for valor in no.values():
+            if isinstance(valor, dict):
+                valoresMemorias(valor, memorias)
+            elif isinstance(valor, list):
+                for i in valor:
+                    if isinstance(i, dict):
+                        valoresMemorias(i, memorias)
+
 def gerarNo_Assembly(no, assembly, contadorPot, numLinhaAtual):
     tipo = no.get("tipo")
     
@@ -53,6 +68,23 @@ def gerarNo_Assembly(no, assembly, contadorPot, numLinhaAtual):
 
             return numLinhaAtual
         
+        case "leitura_memoria":
+            nomeMemo=no["nome"]
+            assembly.append(f"LDR R0, =memo_{nomeMemo}")
+            assembly.append("VLDR.F64 D0, [R0]")
+            return numLinhaAtual
+        
+        case "atribuicao_memoria":
+            nomeMemo = no["nome"]
+            gerarNo_Assembly(no["valor"], assembly, contadorPot, numLinhaAtual)
+            assembly.append(f"LDR R0, =memo_{nomeMemo}")
+            assembly.append("VSTR.F64 D0, [R0]")
+            assembly.append(f"LDR R0, =resultado_{numLinhaAtual}")
+            assembly.append("VSTR.F64 D0, [R0]")
+            assembly.append(".ltorg")
+
+            return numLinhaAtual + 1
+        
         case "res":
             indice = no["indice"]
             linhaResultado = numLinhaAtual - indice
@@ -65,6 +97,7 @@ def gerarNo_Assembly(no, assembly, contadorPot, numLinhaAtual):
 
             assembly.append(f"LDR R0, =resultado_{numLinhaAtual}")
             assembly.append("VSTR.F64 D0, [R0]")
+            assembly.append(".ltorg")
             return numLinhaAtual + 1
         
         case "expressao_aritmetica":
@@ -119,6 +152,7 @@ def gerarNo_Assembly(no, assembly, contadorPot, numLinhaAtual):
 
             assembly.append(f"LDR R0, =resultado_{numLinhaAtual}")
             assembly.append(f"VSTR.F64 D0, [R0]")
+            assembly.append(".ltorg")
 
             return numLinhaAtual + 1
 
@@ -126,6 +160,8 @@ def gerarAssembly(arvoreSimplificada):
     assembly = []  # lista que armazena as instruções assembly
     contadorPot = [0] # contador para gerar labels únicos de pontenciação
     valores = set()
+    memorias = set()
+    valoresMemorias(arvoreSimplificada, memorias)
     valoresConstantes(arvoreSimplificada, valores)
     valores.add(1.0)
 
@@ -136,6 +172,9 @@ def gerarAssembly(arvoreSimplificada):
     for val in sorted(valores):
         x = f"val_{str(val).replace('.', '_')}" # cria a label do valor
         assembly.append(f"{x}: .double {val}")
+
+    for memo in sorted(memorias):
+        assembly.append(f"memo_{memo}: .double 0.0")
 
     for k in range(20):
         assembly.append(f"resultado_{k}: .double 0.0")

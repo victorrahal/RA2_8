@@ -81,6 +81,20 @@ def simplificarArvore(no):
                 
         case "corpo": 
 
+            # para for
+            if len(no.filhos) == 5:
+                primeiroTermo = no.filhos[0]
+
+                if(primeiroTermo.tipo_no == "terminal" and primeiroTermo.simbolo == "KW_FOR"):
+                    return {
+                        "tipo": "for",
+                        "inicio": simplificarArvore(no.filhos[1]),
+                        "fim": simplificarArvore(no.filhos[2]),
+                        "variavel": no.filhos[3].token.get("valor"),
+                        "corpo": simplificarArvore(no.filhos[4]),
+                        "linha": primeiroTermo.token.get("linha")
+                    }
+
             # para while
             if len(no.filhos) == 3:
                 primeiroTermo = no.filhos[0]

@@ -65,240 +65,42 @@
               "tipo_no": "nao_terminal",
               "simbolo": "corpo",
               "producao": [
-                "KW_WHILE",
-                "condicao",
-                "linha"
+                "REAL",
+                "resto_corpo"
               ],
               "filhos": [
                 {
                   "tipo_no": "terminal",
-                  "simbolo": "KW_WHILE",
+                  "simbolo": "REAL",
                   "token": {
-                    "tipo": "KW_WHILE",
-                    "valor": "WHILE",
+                    "tipo": "REAL",
+                    "valor": "42.5",
                     "linha": 2
                   }
                 },
                 {
                   "tipo_no": "nao_terminal",
-                  "simbolo": "condicao",
+                  "simbolo": "resto_corpo",
                   "producao": [
-                    "LPAREN",
-                    "operando",
-                    "operando",
-                    "op_rel",
-                    "RPAREN"
+                    "KW_MEM",
+                    "MEM_ID"
                   ],
                   "filhos": [
                     {
                       "tipo_no": "terminal",
-                      "simbolo": "LPAREN",
+                      "simbolo": "KW_MEM",
                       "token": {
-                        "tipo": "LPAREN",
-                        "valor": "(",
+                        "tipo": "KW_MEM",
+                        "valor": "MEM",
                         "linha": 2
                       }
                     },
                     {
-                      "tipo_no": "nao_terminal",
-                      "simbolo": "operando",
-                      "producao": [
-                        "MEM_ID"
-                      ],
-                      "filhos": [
-                        {
-                          "tipo_no": "terminal",
-                          "simbolo": "MEM_ID",
-                          "token": {
-                            "tipo": "MEM_ID",
-                            "valor": "X",
-                            "linha": 2
-                          }
-                        }
-                      ]
-                    },
-                    {
-                      "tipo_no": "nao_terminal",
-                      "simbolo": "operando",
-                      "producao": [
-                        "INT"
-                      ],
-                      "filhos": [
-                        {
-                          "tipo_no": "terminal",
-                          "simbolo": "INT",
-                          "token": {
-                            "tipo": "INT",
-                            "valor": "5",
-                            "linha": 2
-                          }
-                        }
-                      ]
-                    },
-                    {
-                      "tipo_no": "nao_terminal",
-                      "simbolo": "op_rel",
-                      "producao": [
-                        "OP_LT"
-                      ],
-                      "filhos": [
-                        {
-                          "tipo_no": "terminal",
-                          "simbolo": "OP_LT",
-                          "token": {
-                            "tipo": "OP_LT",
-                            "valor": "<",
-                            "linha": 2
-                          }
-                        }
-                      ]
-                    },
-                    {
                       "tipo_no": "terminal",
-                      "simbolo": "RPAREN",
+                      "simbolo": "MEM_ID",
                       "token": {
-                        "tipo": "RPAREN",
-                        "valor": ")",
-                        "linha": 2
-                      }
-                    }
-                  ]
-                },
-                {
-                  "tipo_no": "nao_terminal",
-                  "simbolo": "linha",
-                  "producao": [
-                    "LPAREN",
-                    "corpo",
-                    "RPAREN"
-                  ],
-                  "filhos": [
-                    {
-                      "tipo_no": "terminal",
-                      "simbolo": "LPAREN",
-                      "token": {
-                        "tipo": "LPAREN",
-                        "valor": "(",
-                        "linha": 2
-                      }
-                    },
-                    {
-                      "tipo_no": "nao_terminal",
-                      "simbolo": "corpo",
-                      "producao": [
-                        "linha",
-                        "resto_corpo"
-                      ],
-                      "filhos": [
-                        {
-                          "tipo_no": "nao_terminal",
-                          "simbolo": "linha",
-                          "producao": [
-                            "LPAREN",
-                            "corpo",
-                            "RPAREN"
-                          ],
-                          "filhos": [
-                            {
-                              "tipo_no": "terminal",
-                              "simbolo": "LPAREN",
-                              "token": {
-                                "tipo": "LPAREN",
-                                "valor": "(",
-                                "linha": 2
-                              }
-                            },
-                            {
-                              "tipo_no": "nao_terminal",
-                              "simbolo": "corpo",
-                              "producao": [
-                                "MEM_ID",
-                                "cauda_mem"
-                              ],
-                              "filhos": [
-                                {
-                                  "tipo_no": "terminal",
-                                  "simbolo": "MEM_ID",
-                                  "token": {
-                                    "tipo": "MEM_ID",
-                                    "valor": "X",
-                                    "linha": 2
-                                  }
-                                },
-                                {
-                                  "tipo_no": "nao_terminal",
-                                  "simbolo": "cauda_mem",
-                                  "producao": [
-                                    "ε"
-                                  ]
-                                }
-                              ]
-                            },
-                            {
-                              "tipo_no": "terminal",
-                              "simbolo": "RPAREN",
-                              "token": {
-                                "tipo": "RPAREN",
-                                "valor": ")",
-                                "linha": 2
-                              }
-                            }
-                          ]
-                        },
-                        {
-                          "tipo_no": "nao_terminal",
-                          "simbolo": "resto_corpo",
-                          "producao": [
-                            "operando",
-                            "operador_arit"
-                          ],
-                          "filhos": [
-                            {
-                              "tipo_no": "nao_terminal",
-                              "simbolo": "operando",
-                              "producao": [
-                                "INT"
-                              ],
-                              "filhos": [
-                                {
-                                  "tipo_no": "terminal",
-                                  "simbolo": "INT",
-                                  "token": {
-                                    "tipo": "INT",
-                                    "valor": "1",
-                                    "linha": 2
-                                  }
-                                }
-                              ]
-                            },
-                            {
-                              "tipo_no": "nao_terminal",
-                              "simbolo": "operador_arit",
-                              "producao": [
-                                "OP_SUM"
-                              ],
-                              "filhos": [
-                                {
-                                  "tipo_no": "terminal",
-                                  "simbolo": "OP_SUM",
-                                  "token": {
-                                    "tipo": "OP_SUM",
-                                    "valor": "+",
-                                    "linha": 2
-                                  }
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    },
-                    {
-                      "tipo_no": "terminal",
-                      "simbolo": "RPAREN",
-                      "token": {
-                        "tipo": "RPAREN",
-                        "valor": ")",
+                        "tipo": "MEM_ID",
+                        "valor": "VALOR",
                         "linha": 2
                       }
                     }
@@ -336,18 +138,36 @@
                   "tipo_no": "nao_terminal",
                   "simbolo": "linhas_rest",
                   "producao": [
-                    "KW_END",
-                    "RPAREN"
+                    "corpo",
+                    "RPAREN",
+                    "linhas"
                   ],
                   "filhos": [
                     {
-                      "tipo_no": "terminal",
-                      "simbolo": "KW_END",
-                      "token": {
-                        "tipo": "KW_END",
-                        "valor": "END",
-                        "linha": 3
-                      }
+                      "tipo_no": "nao_terminal",
+                      "simbolo": "corpo",
+                      "producao": [
+                        "MEM_ID",
+                        "cauda_mem"
+                      ],
+                      "filhos": [
+                        {
+                          "tipo_no": "terminal",
+                          "simbolo": "MEM_ID",
+                          "token": {
+                            "tipo": "MEM_ID",
+                            "valor": "VALOR",
+                            "linha": 3
+                          }
+                        },
+                        {
+                          "tipo_no": "nao_terminal",
+                          "simbolo": "cauda_mem",
+                          "producao": [
+                            "ε"
+                          ]
+                        }
+                      ]
                     },
                     {
                       "tipo_no": "terminal",
@@ -357,6 +177,53 @@
                         "valor": ")",
                         "linha": 3
                       }
+                    },
+                    {
+                      "tipo_no": "nao_terminal",
+                      "simbolo": "linhas",
+                      "producao": [
+                        "LPAREN",
+                        "linhas_rest"
+                      ],
+                      "filhos": [
+                        {
+                          "tipo_no": "terminal",
+                          "simbolo": "LPAREN",
+                          "token": {
+                            "tipo": "LPAREN",
+                            "valor": "(",
+                            "linha": 4
+                          }
+                        },
+                        {
+                          "tipo_no": "nao_terminal",
+                          "simbolo": "linhas_rest",
+                          "producao": [
+                            "KW_END",
+                            "RPAREN"
+                          ],
+                          "filhos": [
+                            {
+                              "tipo_no": "terminal",
+                              "simbolo": "KW_END",
+                              "token": {
+                                "tipo": "KW_END",
+                                "valor": "END",
+                                "linha": 4
+                              }
+                            },
+                            {
+                              "tipo_no": "terminal",
+                              "simbolo": "RPAREN",
+                              "token": {
+                                "tipo": "RPAREN",
+                                "valor": ")",
+                                "linha": 4
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     }
                   ]
                 }

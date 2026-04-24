@@ -2,7 +2,8 @@
 .data
 .align 3
 val_1_0: .double 1.0
-val_5_0: .double 5.0
+val_42_5: .double 42.5
+memo_VALOR: .double 0.0
 resultado_0: .double 0.0
 resultado_1: .double 0.0
 resultado_2: .double 0.0
@@ -28,5 +29,14 @@ resultado_19: .double 0.0
 .fpu vfpv3
 .align 2
 _start:
+LDR R0, =val_42_5
+VLDR.F64 D0, [R0]
+LDR R0, =memo_VALOR
+VSTR.F64 D0, [R0]
+LDR R0, =resultado_0
+VSTR.F64 D0, [R0]
+.ltorg
+LDR R0, =memo_VALOR
+VLDR.F64 D0, [R0]
     MOV R7, #1
     SWI #0

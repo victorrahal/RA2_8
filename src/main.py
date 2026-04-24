@@ -5,83 +5,72 @@
 # Victor Rahal Basseto      - @victorrahal
 
 import os
- 
-from utils import validarArgumentos, salvarTokens
-from lerArquivo import lerArquivo
-from parseExpressao import parseExpressao
-from executarExpressao import executarExpressao
+import sys
+import json
 from gerarAssembly import gerarAssembly
-from exibirResultados import exibirResultados
- 
+from lerTokens import lerTokens
+from parsear import parsear 
+from gerarArvore import gerarArvore, imprimirArvore, simplificarArvore, salvarArvore, salvarArvoreSimplificada, gerarGraficoArvoreSimplificada
+from construirGramatica import construirGramatica
+
+raiz = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+
 def main():
-    nomeArquivo = validarArgumentos()
-    print(f"Processando arquivo: {nomeArquivo}")
-    print()
- 
-    try:
-        linhas = lerArquivo(nomeArquivo)
-    except Exception as e:
-        print(f"Erro ao ler o arquivo: {e}")
+    if len(sys.argv) != 2:
+        print("Uso: python main.py <arquivo_teste.txt>")
         return
- 
-    if not linhas:
-        print("Erro: nenhuma linha válida encontrada no arquivo.")
-        return
- 
-    print(f"Linhas lidas: {len(linhas)}")
+    
+    arquivoEntrada = os.path.join(raiz, "testes", sys.argv[1])
+    if not os.path.isfile(arquivoEntrada):
+        print(f"Erro: arquivo '{sys.argv[1]}' não encontrado")
+
+    print(f'Processadno arquivo: {arquivoEntrada}')
     print()
- 
-    tokens_todas_linhas = []
-    print("Análise léxica:")
-    for i, linha in enumerate(linhas):
-        try:
-            tokens = parseExpressao(linha)
-            tokens_todas_linhas.append(tokens)
-            print(f"  Linha {i + 1}: {tokens}")
-        except Exception as e:
-            print(f"  Linha {i + 1}: ERRO LÉXICO - {e}")
-            tokens_todas_linhas.append([])
-    print()
- 
-    memorias = {}
-    historico = []
-    resultados = []
- 
-    for i, tokens in enumerate(tokens_todas_linhas):
-        if not tokens:
-            resultados.append(0.0)
-            historico.append(0.0)
-            continue
-        try:
-            resultado, memorias = executarExpressao(tokens, memorias, historico)
-            resultados.append(resultado)
-            historico.append(resultado)
-        except Exception as e:
-            print(f"Erro ao executar linha {i + 1}: {e}")
-            resultados.append(0.0)
-            historico.append(0.0)
- 
-    exibirResultados(resultados)
-    print()
- 
-    dirOutputs = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'outputs')
-    os.makedirs(dirOutputs, exist_ok=True)
 
     try:
-        caminhoAssembly = os.path.join(dirOutputs, 'Assembly.s')
-        codigoAssembly = gerarAssembly(tokens_todas_linhas, arquivoSaida=caminhoAssembly)
-        print(f"Assembly salvo em: {caminhoAssembly}")
-    except Exception as e:
-        print(f"Erro ao gerar Assembly: {e}")
+        # Tokens
+        tokens = lerTokens(arquivoEntrada)
 
-    try:
-        caminhoTokens = os.path.join(dirOutputs, 'tokens.json')
-        salvarTokens(tokens_todas_linhas, caminhoTokens)
-    except Exception as e:
-        print(f"Erro ao salvar tokens: {e}")
- 
-    print()
-    print("Processamento concluído com sucesso!")
- 
+        # Construção da gramática LL(1)
+        info = construirGramatica()
+
+        # Parser / derivação
+        derivacaotxt, derivacaojson = parsear(tokens, info["tabela_ll1"], info["inicio"])
+
+        print("====DERIVAÇÃO====")
+        for regra in derivacaotxt:
+            print(regra)
+
+        # Geração da árvore Sintática
+        arvore = gerarArvore(derivacaojson)
+
+        print("\n====ÁRVORE SINÁTICA====")
+        imprimirArvore(arvore)
+
+        # Simplificação da árvore
+        arvoreSimplificada = simplificarArvore(arvore)
+
+        print("\n====ÁRVORE SIMPLIFICADA====")
+        print(json.dumps(arvoreSimplificada, indent=2, ensure_ascii=False))
+
+        # Salvando arquivos JSON
+        caminhoArvore = salvarArvore(arvore)
+        print(f"\nÁrvore salva em: {caminhoArvore}")
+
+        caminhoArvoreSimplificada = salvarArvoreSimplificada(arvoreSimplificada)
+        print(f"\nÁrvore simplificada salva em: {caminhoArvoreSimplificada}")
+
+        # Gerando Gráfico da Árvore Sintática
+        caminhoGráfico = gerarGraficoArvoreSimplificada(arvoreSimplificada)
+        print(f"\nGráfico da árvore salvo em: {caminhoGráfico}")
+
+        # Gerando Assembly
+        gerarAssembly(arvoreSimplificada)
+        print("\nAssembly gerado com sucesso")
+
+        print("\nProcessamento concluído com sucesso!")
+    except Exception as erro:
+        print(f"Erro durante o processamento: {erro}")
+
 if __name__ == "__main__":
     main()
