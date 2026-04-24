@@ -1,3 +1,4 @@
 (START)
-(WHILE (X 5 <) ((X) 1 +))
+(42.5 MEM VALOR)
+(VALOR)
 (END)

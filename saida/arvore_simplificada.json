@@ -1,41 +1,26 @@
 {
   "tipo": "sequencia",
   "atual": {
-    "tipo": "for",
-    "inicio": {
+    "tipo": "atribuicao_memoria",
+    "nome": "VALOR",
+    "valor": {
       "tipo": "terminal",
-      "simbolo": "INT",
-      "valor": "0",
-      "linha": 2
-    },
-    "fim": {
-      "tipo": "terminal",
-      "simbolo": "INT",
-      "valor": "3",
-      "linha": 2
-    },
-    "variavel": "J",
-    "corpo": {
-      "tipo": "expressao_aritmetica",
-      "operador": "*",
-      "operandos": [
-        {
-          "tipo": "leitura_memoria",
-          "nome": "J",
-          "linha": 2
-        },
-        {
-          "tipo": "leitura_memoria",
-          "nome": "J",
-          "linha": 2
-        }
-      ],
+      "simbolo": "REAL",
+      "valor": "42.5",
       "linha": 2
     },
     "linha": 2
   },
   "proximo": {
-    "tipo": "fim_programa",
-    "linha": 3
+    "tipo": "sequencia",
+    "atual": {
+      "tipo": "leitura_memoria",
+      "nome": "VALOR",
+      "linha": 3
+    },
+    "proximo": {
+      "tipo": "fim_programa",
+      "linha": 4
+    }
   }
 }
