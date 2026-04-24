@@ -1,14 +1,14 @@
 {
   "tipo": "sequencia",
   "atual": {
-    "tipo": "if",
+    "tipo": "while",
     "condicao": {
       "tipo": "condicao",
-      "operador": ">",
+      "operador": "<",
       "esquerdo": {
         "tipo": "terminal",
-        "simbolo": "INT",
-        "valor": "10",
+        "simbolo": "MEM_ID",
+        "valor": "X",
         "linha": 2
       },
       "direito": {
@@ -19,39 +19,19 @@
       },
       "linha": 2
     },
-    "entao": {
+    "corpo": {
       "tipo": "expressao_aritmetica",
       "operador": "+",
       "operandos": [
         {
-          "tipo": "terminal",
-          "simbolo": "REAL",
-          "valor": "1.0",
+          "tipo": "leitura_memoria",
+          "nome": "X",
           "linha": 2
         },
         {
           "tipo": "terminal",
-          "simbolo": "REAL",
-          "valor": "2.0",
-          "linha": 2
-        }
-      ],
-      "linha": 2
-    },
-    "senao": {
-      "tipo": "expressao_aritmetica",
-      "operador": "-",
-      "operandos": [
-        {
-          "tipo": "terminal",
-          "simbolo": "REAL",
-          "valor": "3.0",
-          "linha": 2
-        },
-        {
-          "tipo": "terminal",
-          "simbolo": "REAL",
-          "valor": "4.0",
+          "simbolo": "INT",
+          "valor": "1",
           "linha": 2
         }
       ],
