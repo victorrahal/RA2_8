@@ -115,7 +115,6 @@ def parsear(tokens, tabela, simbolo_inicial):
     return derivacao, raiz.to_dict() # retorna a derivação e a árvore em formato de JSON
 
 
-# ================= TESTE =================
 
 info = construirGramatica()
 
