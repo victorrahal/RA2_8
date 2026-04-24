@@ -127,9 +127,12 @@ Mantêm o padrão totalmente parentizado e pós-fixado:
 (FOR ini fim VAR (corpo))
 ```
 
-Condições usam operadores relacionais em pós-fixo: `(A B <)`, `(A B ==)`, etc.
+Condições usam operadores relacionais em pós-fixo: `(A B <)`, `(A B >)`.
 
-**Operadores relacionais suportados:** `<`, `>`, `<=`, `>=`, `==`, `!=`.
+**Operadores relacionais suportados:** `<`, `>`.
+
+> Operadores relacionais compostos (`<=`, `>=`, `==`, `!=`) **não** fazem
+> parte da linguagem e seu uso gera erro léxico.
 
 #### Exemplos
 
@@ -177,7 +180,7 @@ operador_arit  ::= OP_SUM | OP_SUB | OP_MUL
 
 condicao       ::= LPAREN operando operando op_rel RPAREN
 
-op_rel         ::= OP_LT | OP_GT | OP_LE | OP_GE | OP_EQ | OP_NE
+op_rel         ::= OP_LT | OP_GT
 ```
 
 ### Decisões de fatoração
