@@ -62,8 +62,6 @@ def parsear(tokens, tabela, simbolo_inicial):
         tipo_atual = atual["tipo"]
         linha_atual = atual["linha"]
 
-        print(f"Topo: {topo} | Token atual: {tipo_atual}")
-
         # condição de parada
         if topo == EOF and tipo_atual == EOF:
             break
@@ -122,10 +120,6 @@ caminho_tokens = os.path.join(raiz, "testes", "teste1.txt")
 tokens2 = lerTokens(caminho_tokens)
 
 derivacao, arvore = parsear(tokens2, info["tabela_ll1"], info["inicio"])
-
-print("\nDERIVAÇÃO:") # Solta o print da derivação 
-for d in derivacao:
-    print(d) 
 
 caminho_arquivo = os.path.join(raiz, "saida", "derivacao.json")
 
