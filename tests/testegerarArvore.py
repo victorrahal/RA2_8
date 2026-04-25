@@ -22,5 +22,5 @@ print(f"Árvore Simplificada salva em: {caminho2}")
 
 codigoAssembly = gerarAssembly(arvoreSimplificada) #salva assembly
 
-caminhoImg = gerarGraficoArvoreSimplificada(arvoreSimplificada)
-print("Imagem da árvore salva em:", caminhoImg)
+# caminhoImg = gerarGraficoArvoreSimplificada(arvoreSimplificada)
+# print("Imagem da árvore salva em:", caminhoImg)
