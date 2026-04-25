@@ -57,8 +57,8 @@ def gerarNo_Assembly(no, assembly, contadorPot, contadorLabel, numLinhaAtual):
     
     match tipo:
         case "sequencia":
-            proximaLinha = gerarNo_Assembly(no["atual"], assembly, contadorPot, numLinhaAtual)
-            return gerarNo_Assembly(no["proximo"], assembly, contadorPot, proximaLinha)
+            proximaLinha = gerarNo_Assembly(no["atual"], assembly, contadorPot, contadorLabel, numLinhaAtual)
+            return gerarNo_Assembly(no["proximo"], assembly, contadorPot, contadorLabel, proximaLinha)
         
         case "fim_programa":
             return numLinhaAtual
@@ -81,7 +81,7 @@ def gerarNo_Assembly(no, assembly, contadorPot, contadorLabel, numLinhaAtual):
         
         case "atribuicao_memoria":
             nomeMemo = no["nome"]
-            gerarNo_Assembly(no["valor"], assembly, contadorPot, numLinhaAtual)
+            gerarNo_Assembly(no["valor"], assembly, contadorPot, contadorLabel, numLinhaAtual)
             assembly.append(f"LDR R0, =memo_{nomeMemo}")
             assembly.append("VSTR.F64 D0, [R0]")
             assembly.append(f"LDR R0, =resultado_{numLinhaAtual}")
@@ -149,27 +149,34 @@ def gerarNo_Assembly(no, assembly, contadorPot, contadorLabel, numLinhaAtual):
             idLabel = contadorLabel[0]
             contadorLabel[0] += 1
 
-            labelInicio(f"for_inicio_{idLabel}")
-            labelFim(f"for_fim_{idLabel}")
+            labelInicio = f"for_inicio_{idLabel}"
+            labelFim = f"for_fim_{idLabel}"
 
             variavel = no["variavel"]
 
-            #inicializa variavel
+            # inicializa variavel
             gerarNo_Assembly(no["inicio"], assembly, contadorPot, contadorLabel, numLinhaAtual)
-            assembly.append(f"LDR R0, =memo{variavel}")
+            assembly.append(f"LDR R0, =memo_{variavel}")
             assembly.append("VSTR.F64 D0, [R0]")
 
             assembly.append(f"{labelInicio}:")
 
-            #carrega variavel em D1
+            # carrega variavel em D1
+            assembly.append(f"LDR R0, =memo_{variavel}")
+            assembly.append("VLDR.F64 D1, [R0]")
+
+            # carrega fim em D0
+            gerarNo_Assembly(no["fim"], assembly, contadorPot, contadorLabel, numLinhaAtual)
+
+            # se variavel > fim, sai
             assembly.append("VCMP.F64 D1, D0")
             assembly.append("VMRS APSR_nzcv, FPSCR")
             assembly.append(f"BGT {labelFim}")
 
             numLinhaAtual = gerarNo_Assembly(no["corpo"], assembly, contadorPot, contadorLabel, numLinhaAtual)
 
-            #incremento de variável
-            assembly.append(f"LDR R0, memo_{variavel}")
+            # incremento da variável
+            assembly.append(f"LDR R0, =memo_{variavel}")
             assembly.append("VLDR.F64 D0, [R0]")
             assembly.append("LDR R0, =val_1_0")
             assembly.append("VLDR.F64 D1, [R0]")
@@ -178,8 +185,10 @@ def gerarNo_Assembly(no, assembly, contadorPot, contadorLabel, numLinhaAtual):
             assembly.append("VSTR.F64 D0, [R0]")
 
             assembly.append(f"B {labelInicio}")
-            assembly.append(f"{labelFim}")
+            assembly.append(f"{labelFim}:")
             assembly.append(".ltorg")
+
+            return numLinhaAtual
         
         case "expressao_aritmetica":
             operandoEsquerdo = no["operandos"][0]
@@ -187,11 +196,11 @@ def gerarNo_Assembly(no, assembly, contadorPot, contadorLabel, numLinhaAtual):
             operador = no["operador"]
 
             #gera operando esquerdo no registardor D0
-            gerarNo_Assembly(operandoEsquerdo, assembly, contadorPot, numLinhaAtual)
+            gerarNo_Assembly(operandoEsquerdo, assembly, contadorPot, contadorLabel, numLinhaAtual)
             assembly.append("VMOV.F64 D1, D0")
 
             #gera operando direito no registrador D0
-            gerarNo_Assembly(operandoDireito, assembly, contadorPot, numLinhaAtual)
+            gerarNo_Assembly(operandoDireito, assembly, contadorPot, contadorLabel, numLinhaAtual)
 
             match operador:
                 case '+':
