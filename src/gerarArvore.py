@@ -1,7 +1,6 @@
 # Aluno 4 - Lucas Balint Vilar
 import json
 import os
-from graphviz import Digraph
 
 raiz = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 caminhoArvore = os.path.join(raiz, "saida", "arvore.json")
@@ -222,6 +221,7 @@ def imprimirArvore(no, nivel=0):
 
 # gera gráfico da árvore sintática
 def gerarGraficoArvoreSimplificada(arvoreSimplificada):
+    from graphviz import Digraph
     graf = Digraph()
 
     def visitar(no, id_pai=None, cont=[0]):
@@ -254,6 +254,22 @@ def gerarGraficoArvoreSimplificada(arvoreSimplificada):
         elif tipo == "expressao_aritmetica":
             visitar(no["operandos"][0], id_atual)
             visitar(no["operandos"][1], id_atual)
+        elif tipo == "if":
+            visitar(no["condicao"], id_atual)
+            visitar(no["entao"], id_atual)
+            visitar(no["senao"], id_atual)
+        elif tipo == "while":
+            visitar(no["condicao"], id_atual)
+            visitar(no["corpo"], id_atual)
+        elif tipo == "for":
+            visitar(no["inicio"], id_atual)
+            visitar(no["fim"], id_atual)
+            visitar(no["corpo"], id_atual)
+        elif tipo == "atribuicao_memoria":
+            visitar(no["valor"], id_atual)
+        elif tipo == "condicao":
+            visitar(no["esquerdo"], id_atual)
+            visitar(no["direito"], id_atual)
 
     visitar(arvoreSimplificada)
     graf.render(caminhoGrafico, format="png", view=True)
