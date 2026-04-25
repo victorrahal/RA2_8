@@ -20,6 +20,13 @@ OPERADORES_SIMPLES = {
     '^': 'OP_POW',
     '<': 'OP_LT',
     '>': 'OP_GT'} 
+
+OPERADORES_DUPLOS = {
+    '<': 'OP_LE',
+    '>': 'OP_GE',
+    '=': 'OP_EQ',
+    '!': 'OP_NE'
+}
  
 def criarToken(tipo, valor, linha):
     return {"tipo": tipo, "valor": valor, "linha": linha}
