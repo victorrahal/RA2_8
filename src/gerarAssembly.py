@@ -33,7 +33,26 @@ def valoresMemorias(no, memorias):
                     if isinstance(i, dict):
                         valoresMemorias(i, memorias)
 
-def gerarNo_Assembly(no, assembly, contadorPot, numLinhaAtual):
+def branchFalso(operador):
+    match operador:
+        case "<":
+            return "BGE"
+        case ">":
+            return "BLE"
+        case _:
+            return "B erro_condicao"
+        
+def gerarCondicao(no, assembly, contadorPot, contadorLabel, numLinhaAtual):
+    gerarNo_Assembly(no['esquerdo'], assembly, contadorPot, contadorLabel, numLinhaAtual)
+    assembly.append("VMOV.F64 D1, D0")
+
+    gerarNo_Assembly(no["direito"], assembly, contadorPot, contadorLabel, numLinhaAtual)
+    assembly.append("VCMP.F64 D1, D0")
+    assembly.append("VMRS APSR_nzcv, FPSCR")
+
+    return no["operador"]
+
+def gerarNo_Assembly(no, assembly, contadorPot, contadorLabel, numLinhaAtual):
     tipo = no.get("tipo")
     
     match tipo:
@@ -85,6 +104,82 @@ def gerarNo_Assembly(no, assembly, contadorPot, numLinhaAtual):
             assembly.append("VSTR.F64 D0, [R0]")
             assembly.append(".ltorg")
             return numLinhaAtual + 1
+        
+        case "if":
+            idLabel = contadorLabel[0]
+            contadorLabel[0] += 1
+            labelElse = f"if_else{idLabel}"
+            labelFim = f"if_fim{idLabel}"
+
+            operador = gerarCondicao(no["condicao"], assembly, contadorPot, contadorLabel, numLinhaAtual)
+            assembly.append(f"{branchFalso(operador)} {labelElse}")
+
+            numLinhaAtual = gerarNo_Assembly(no["entao"], assembly, contadorPot, contadorLabel, numLinhaAtual)
+            assembly.append(f"B {labelFim}")
+
+            assembly.append(f"{labelElse}:")
+            numLinhaAtual = gerarNo_Assembly(no["senao"], assembly, contadorPot, contadorLabel, numLinhaAtual)
+            
+            assembly.append(f"{labelFim}:")
+            assembly.append(".ltorg")
+
+            return numLinhaAtual
+        
+        case "while":
+            idLabel = contadorLabel[0]
+            contadorLabel[0] += 1
+
+            labelInicio = f"while_inicio_{idLabel}"
+            labelFim = f"while_fim_{idLabel}"
+
+            assembly.append(f"{labelInicio}:")
+
+            operador = gerarCondicao(no["condicao"], assembly, contadorPot, contadorLabel, numLinhaAtual)
+            assembly.append(f"{branchFalso(operador)} {labelFim}")
+
+            numLinhaAtual = gerarNo_Assembly(no["corpo"], assembly, contadorPot, contadorLabel, numLinhaAtual)
+
+            assembly.append(f"B {labelInicio}")
+            assembly.append(f"{labelFim}:")
+            assembly.append(".ltorg")
+
+            return numLinhaAtual
+        
+        case "for":
+            idLabel = contadorLabel[0]
+            contadorLabel[0] += 1
+
+            labelInicio(f"for_inicio_{idLabel}")
+            labelFim(f"for_fim_{idLabel}")
+
+            variavel = no["variavel"]
+
+            #inicializa variavel
+            gerarNo_Assembly(no["inicio"], assembly, contadorPot, contadorLabel, numLinhaAtual)
+            assembly.append(f"LDR R0, =memo{variavel}")
+            assembly.append("VSTR.F64 D0, [R0]")
+
+            assembly.append(f"{labelInicio}:")
+
+            #carrega variavel em D1
+            assembly.append("VCMP.F64 D1, D0")
+            assembly.append("VMRS APSR_nzcv, FPSCR")
+            assembly.append(f"BGT {labelFim}")
+
+            numLinhaAtual = gerarNo_Assembly(no["corpo"], assembly, contadorPot, contadorLabel, numLinhaAtual)
+
+            #incremento de variável
+            assembly.append(f"LDR R0, memo_{variavel}")
+            assembly.append("VLDR.F64 D0, [R0]")
+            assembly.append("LDR R0, =val_1_0")
+            assembly.append("VLDR.F64 D1, [R0]")
+            assembly.append("VADD.F64 D0, D0, D1")
+            assembly.append(f"LDR R0, =memo_{variavel}")
+            assembly.append("VSTR.F64 D0, [R0]")
+
+            assembly.append(f"B {labelInicio}")
+            assembly.append(f"{labelFim}")
+            assembly.append(".ltorg")
         
         case "expressao_aritmetica":
             operandoEsquerdo = no["operandos"][0]
@@ -145,6 +240,7 @@ def gerarNo_Assembly(no, assembly, contadorPot, numLinhaAtual):
 def gerarAssembly(arvoreSimplificada):
     assembly = []  # lista que armazena as instruções assembly
     contadorPot = [0] # contador para gerar labels únicos de pontenciação
+    contadorLabel = [0]
     valores = set()
     memorias = set()
     valoresMemorias(arvoreSimplificada, memorias)
@@ -172,7 +268,7 @@ def gerarAssembly(arvoreSimplificada):
     assembly.append(".align 2")        
     assembly.append("_start:")
 
-    gerarNo_Assembly(arvoreSimplificada, assembly, contadorPot, 0)
+    gerarNo_Assembly(arvoreSimplificada, assembly, contadorPot, contadorLabel,0)
 
     # finaliza o programa para não ficar em loop
     assembly.append("    MOV R7, #1")
