@@ -1,5 +1,5 @@
 # João Henrique Tomaz Dutra - Aluno 2
-from construirGramatica import construirGramatica, eh_terminal
+from construirGramatica import construirGramatica
 from lerTokens import lerTokens
 import json
 import os
