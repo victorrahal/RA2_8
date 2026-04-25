@@ -13,7 +13,7 @@ TERMINAIS = {
     "OP_SUM", "OP_SUB", "OP_MUL",
     "OP_DIVR", "OP_DIVI", "OP_MOD", "OP_POW",
     # Operadores relacionais (para estruturas de controle)
-    "OP_LT", "OP_GT", "OP_LE", "OP_GE", "OP_EQ", "OP_NE",
+    "OP_LT", "OP_GT",
     # Palavras reservadas
     "KW_START", "KW_END",
     "KW_RES", "KW_MEM",
@@ -102,8 +102,7 @@ GRAMATICA = {
         ["LPAREN", "operando", "operando", "op_rel", "RPAREN"],
     ],
     "op_rel": [
-        ["OP_LT"], ["OP_GT"], ["OP_LE"],
-        ["OP_GE"], ["OP_EQ"], ["OP_NE"],
+        ["OP_LT"], ["OP_GT"],
     ],
 }
 NAO_TERMINAIS_ATIVOS = {

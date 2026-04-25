@@ -35,8 +35,9 @@ class TestGramaticaLL1(unittest.TestCase):
                     "OP_DIVR", "OP_DIVI", "OP_MOD", "OP_POW"}
         self.assertEqual(self.first["operador_arit"], esperado)
 
-    def test_first_op_rel_tem_todos_os_relacionais(self):
-        esperado = {"OP_LT", "OP_GT", "OP_LE", "OP_GE", "OP_EQ", "OP_NE"}
+    def test_first_op_rel_tem_apenas_relacionais_simples(self):
+        # Operadores duplos foram removidos da linguagem.
+        esperado = {"OP_LT", "OP_GT"}
         self.assertEqual(self.first["op_rel"], esperado)
 
     def test_first_cauda_mem_inclui_epsilon(self):
@@ -105,6 +106,12 @@ class TestGramaticaLL1(unittest.TestCase):
                          ["operando", "operador_arit"])
         self.assertEqual(self.tabela[("resto_corpo", "LPAREN")],
                          ["operando", "operador_arit"])
+
+    def test_op_rel_duplos_nao_estao_na_tabela(self):
+        # Garantia de que terminais OP_LE, OP_GE, OP_EQ, OP_NE foram removidos.
+        for terminal in ("OP_LE", "OP_GE", "OP_EQ", "OP_NE"):
+            self.assertNotIn(("op_rel", terminal), self.tabela,
+                             f"M[op_rel, {terminal}] não deveria existir")
 
     def test_first_cadeia_vazia_retorna_epsilon(self):
         self.assertEqual(firstDeCadeia([], self.first), {EPSILON})
