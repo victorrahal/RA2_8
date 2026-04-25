@@ -10,7 +10,7 @@ import json
 from gerarAssembly import gerarAssembly
 from lerTokens import lerTokens
 from parsear import parsear 
-from gerarArvore import gerarArvore, imprimirArvore, simplificarArvore, salvarArvore, salvarArvoreSimplificada, gerarGraficoArvoreSimplificada
+from gerarArvore import gerarArvore, imprimirArvore, simplificarArvore, salvarArvore, salvarArvoreSimplificada
 from construirGramatica import construirGramatica
 
 raiz = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
@@ -23,8 +23,9 @@ def main():
     arquivoEntrada = os.path.join(raiz, "testes", sys.argv[1])
     if not os.path.isfile(arquivoEntrada):
         print(f"Erro: arquivo '{sys.argv[1]}' não encontrado")
+        return
 
-    print(f'Processadno arquivo: {arquivoEntrada}')
+    print(f'Processando arquivo: {arquivoEntrada}')
     print()
 
     try:
@@ -61,8 +62,8 @@ def main():
         print(f"\nÁrvore simplificada salva em: {caminhoArvoreSimplificada}")
 
         # Gerando Gráfico da Árvore Sintática
-        caminhoGráfico = gerarGraficoArvoreSimplificada(arvoreSimplificada)
-        print(f"\nGráfico da árvore salvo em: {caminhoGráfico}")
+        # caminhoGráfico = gerarGraficoArvoreSimplificada(arvoreSimplificada)
+        # print(f"\nGráfico da árvore salvo em: {caminhoGráfico}")
 
         # Gerando Assembly
         gerarAssembly(arvoreSimplificada)
