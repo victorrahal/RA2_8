@@ -4,7 +4,6 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from src.gerarArvore import gerarArvore, imprimirArvore, salvarArvore, simplificarArvore, salvarArvoreSimplificada, carregarDerivacao
 from src.gerarAssembly import gerarAssembly
-from src.gerarArvore import gerarGraficoArvoreSimplificada
 
 derivacao = carregarDerivacao()
 arvore = gerarArvore(derivacao)
