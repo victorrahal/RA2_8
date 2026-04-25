@@ -136,7 +136,7 @@ class TestNovasKeywordsFase2(unittest.TestCase):
         self.assertIn("KW_FOR", _tipos(tokens))
         
 class TestOperadoresRelacionais(unittest.TestCase):
-    #Testa operadores relacionais novos da Fase 2
+    # Operadores relacionais suportados na linguagem (apenas simples: < e >)
     def test_menor(self):
         arq = _criar_temp("(3 5 <)")
         tokens = lerTokens(arq)
@@ -149,29 +149,33 @@ class TestOperadoresRelacionais(unittest.TestCase):
         os.unlink(arq)
         self.assertEqual(_tipos(tokens), ["LPAREN", "INT", "INT", "OP_GT", "RPAREN"])
 
-    def test_menor_igual(self):
+    # Operadores relacionais duplos foram REMOVIDOS da linguagem.
+    # Os testes abaixo garantem que tentar usá-los gera erro léxico.
+    def test_menor_igual_gera_erro(self):
         arq = _criar_temp("(3 5 <=)")
-        tokens = lerTokens(arq)
+        with self.assertRaises(ValueError):
+            lerTokens(arq)
         os.unlink(arq)
-        self.assertEqual(_tipos(tokens), ["LPAREN", "INT", "INT", "OP_LE", "RPAREN"])
 
-    def test_maior_igual(self):
+    def test_maior_igual_gera_erro(self):
         arq = _criar_temp("(5 3 >=)")
-        tokens = lerTokens(arq)
+        with self.assertRaises(ValueError):
+            lerTokens(arq)
         os.unlink(arq)
-        self.assertEqual(_tipos(tokens), ["LPAREN", "INT", "INT", "OP_GE", "RPAREN"])
 
-    def test_igual(self):
+    def test_igual_gera_erro(self):
+        # '=' não é um caractere válido isolado nem em par
         arq = _criar_temp("(5 5 ==)")
-        tokens = lerTokens(arq)
+        with self.assertRaises(ValueError):
+            lerTokens(arq)
         os.unlink(arq)
-        self.assertEqual(_tipos(tokens), ["LPAREN", "INT", "INT", "OP_EQ", "RPAREN"])
 
-    def test_diferente(self):
+    def test_diferente_gera_erro(self):
+        # '!' não é um caractere válido na linguagem
         arq = _criar_temp("(3 5 !=)")
-        tokens = lerTokens(arq)
+        with self.assertRaises(ValueError):
+            lerTokens(arq)
         os.unlink(arq)
-        self.assertEqual(_tipos(tokens), ["LPAREN", "INT", "INT", "OP_NE", "RPAREN"])
 
 class TestTiposLiterais(unittest.TestCase):
     # Testa classificação correta de INT vs REAL
@@ -259,6 +263,20 @@ class TestErrosLexicos(unittest.TestCase):
     def test_arquivo_inexistente(self):
         with self.assertRaises(FileNotFoundError):
             lerTokens("arquivo_fantasma_xyz.txt")
+
+    def test_caractere_igual_isolado_invalido(self):
+        # '=' não é um operador válido isolado
+        arq = _criar_temp("(3 5 =)")
+        with self.assertRaises(ValueError):
+            lerTokens(arq)
+        os.unlink(arq)
+
+    def test_caractere_exclamacao_invalido(self):
+        # '!' não é um operador válido na linguagem
+        arq = _criar_temp("(3 5 !)")
+        with self.assertRaises(ValueError):
+            lerTokens(arq)
+        os.unlink(arq)
 
 class TestProgramaCompleto(unittest.TestCase):
     # Testa tokenização de um programa completo da Fase 2
