@@ -1,6 +1,6 @@
 # Paulo Henrique Eidi Mino - Aluno 3
 
-from tokensConfig import criarToken, OPERADORES_SIMPLES
+from tokensConfig import criarToken, OPERADORES_SIMPLES, OPERADORES_DUPLOS
 from estadosLexicos import estadoNumero, estadoPalavra
  
 def lerTokens(arquivo):
@@ -43,6 +43,13 @@ def lerTokens(arquivo):
                 tokens.append(tok)
                 continue
  
+            # Operadores de dois caracteres: <=  >=  ==  !=
+            if ch in OPERADORES_DUPLOS and i + 1 < len(linha) and linha[i + 1] == '=':
+                tipo = OPERADORES_DUPLOS[ch]
+                tokens.append(criarToken(tipo, ch + '=', num_linha))
+                i += 2
+                continue
+
             # Operadores simples (aritméticos e relacionais < >)
             if ch in OPERADORES_SIMPLES:
                 tokens.append(criarToken(OPERADORES_SIMPLES[ch], ch, num_linha))
