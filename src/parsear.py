@@ -113,17 +113,17 @@ def parsear(tokens, tabela, simbolo_inicial):
     return derivacao, raiz.to_dict() # retorna a derivação e a árvore em formato de JSON
 
 
+if __name__ == "__main__":
+    info = construirGramatica()
 
-info = construirGramatica()
+    caminho_tokens = os.path.join(raiz, "testes", "teste1.txt")
+    tokens2 = lerTokens(caminho_tokens)
 
-caminho_tokens = os.path.join(raiz, "testes", "teste1.txt")
-tokens2 = lerTokens(caminho_tokens)
+    derivacao, arvore = parsear(tokens2, info["tabela_ll1"], info["inicio"])
 
-derivacao, arvore = parsear(tokens2, info["tabela_ll1"], info["inicio"])
+    caminho_arquivo = os.path.join(raiz, "saida", "derivacao.json")
 
-caminho_arquivo = os.path.join(raiz, "saida", "derivacao.json")
+    with open(caminho_arquivo, "w", encoding="utf-8") as f:
+        json.dump(arvore, f, indent=2, ensure_ascii=False)
 
-with open(caminho_arquivo, "w", encoding="utf-8") as f:
-    json.dump(arvore, f, indent=2, ensure_ascii=False)
-
-print("Derivação salva em:", caminho_arquivo)
+    print("Derivação salva em:", caminho_arquivo)
